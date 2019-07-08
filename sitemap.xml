@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>http://www.woodhome.com/</loc>
+     <loc>https://awsrossw.github.io/aws-scaling-threat-detection-workshop/</loc>
      <lastmod>2019-07-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>http://www.woodhome.com/01-environment-setup/</loc>
+     <loc>https://awsrossw.github.io/aws-scaling-threat-detection-workshop/01-environment-setup/</loc>
      <lastmod>2019-07-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>http://www.woodhome.com/02-attack-simulation/</loc>
+     <loc>https://awsrossw.github.io/aws-scaling-threat-detection-workshop/02-attack-simulation/</loc>
      <lastmod>2019-07-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>http://www.woodhome.com/03-detection-and-remediation/</loc>
+     <loc>https://awsrossw.github.io/aws-scaling-threat-detection-workshop/03-detection-and-remediation/</loc>
      <lastmod>2019-07-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>http://www.woodhome.com/04-review-and-discussion/</loc>
+     <loc>https://awsrossw.github.io/aws-scaling-threat-detection-workshop/04-review-and-discussion/</loc>
      <lastmod>2019-07-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>http://www.woodhome.com/contribute/</loc>
+     <loc>https://awsrossw.github.io/aws-scaling-threat-detection-workshop/contribute/</loc>
      <lastmod>2019-07-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>http://www.woodhome.com/license/</loc>
+     <loc>https://awsrossw.github.io/aws-scaling-threat-detection-workshop/license/</loc>
      <lastmod>2019-07-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
