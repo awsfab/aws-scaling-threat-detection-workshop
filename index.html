@@ -565,7 +565,7 @@
 <h2 id="architecture">Architecture</h2>
 <p>For this Workshop you will have a single instance setup in the us-west-2 region. As this was a “lift-and-shift” migration for piloting, you have yet to build redundancy into your application, so you have a single public-facing web server. The web server has access to the Internet Gateway through an Elastic Network Interface. Customers access your web server through a DNS entry pointing to the Elastic Network Interface. You store static content in an S3 bucket and use the VPC S3 Endpoint Gateway for access from the web server.</p>
 <p>For this Workshop you will have a simple setup with a single instance setup in the us-west-2 region. As this was a “lift-and-shift” migration for piloting, you have yet to build redundancy into your application, so you have a single public-facing web server that is accessed through an internet gateway and retrieves static content from an S3 bucket.</p>
-<p><img alt="Architecture" src="images/diagram-basic-arch.png" title="Workload Architecture" /></p>
+<p><img alt="Architecture" src="images/diagram-basic-arch-v2.png" title="Workload Architecture" /></p>
 <h2 id="presentation-deck">Presentation deck</h2>
 <p><a href="threat-detect-workshop-presentation.pdf">Workshop Presentation Deck</a></p>
 <h2 id="region">Region</h2>
