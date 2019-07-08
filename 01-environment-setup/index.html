@@ -13,7 +13,7 @@
         <meta name="description" content="This hands-on workshop is where you will learn about a number of AWS services involved with threat detection and response as we walk through real-world threat scenarios. Learn about the threat detection capabilities of Amazon GuardDuty, Amazon Macie and AWS Security Hub and the available response options. For each hands-on scenario, we review methods to detect and respond to threats using the following services: AWS CloudTrail, Amazon VPC flow logs, Amazon CloudWatch Events, Amazon Macie, AWS Lambda, Amazon Inspector, Amazon GuardDuty and Amazon Security Hub.">
       
       
-        <link rel="canonical" href="https://scaling-threat-detection.awssecworkshops.com/01-environment-setup/">
+        <link rel="canonical" href="http://www.woodhome.com/01-environment-setup/">
       
       
         <meta name="author" content="aws-security-workshops@amazon.com">
@@ -205,7 +205,7 @@
 
   
 
-<a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/tree/EventEngine/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -214,7 +214,7 @@
     </div>
   
   <div class="md-source__repository">
-    aws-samples/aws-scaling-threat-detection-workshop
+    awsrossw/aws-scaling-threat-detection-workshop
   </div>
 </a>
             </div>
@@ -292,7 +292,7 @@
 
   <!-- Site title -->
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://scaling-threat-detection.awssecworkshops.com/"
+    <a href="http://www.woodhome.com/"
         title="Scaling threat detection and response in AWS" class="md-nav__button md-logo">
       
         <img src="../assets/images/aws_smile_logo.png" width="48" height="48" />
@@ -309,7 +309,7 @@
 
   
 
-<a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/tree/EventEngine/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -318,7 +318,7 @@
     </div>
   
   <div class="md-source__repository">
-    aws-samples/aws-scaling-threat-detection-workshop
+    awsrossw/aws-scaling-threat-detection-workshop
   </div>
 </a>
     </div>
@@ -388,20 +388,6 @@
         <li class="md-nav__item">
   <a href="#enable-amazon-guardduty" title="Enable Amazon GuardDuty" class="md-nav__link">
     Enable Amazon GuardDuty
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable-amazon-macie" title="Enable Amazon Macie" class="md-nav__link">
-    Enable Amazon Macie
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setup-amazon-macie-for-data-discovery-classification" title="Setup Amazon Macie for data discovery &amp; classification" class="md-nav__link">
-    Setup Amazon Macie for data discovery &amp; classification
   </a>
   
 </li>
@@ -533,20 +519,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable-amazon-macie" title="Enable Amazon Macie" class="md-nav__link">
-    Enable Amazon Macie
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setup-amazon-macie-for-data-discovery-classification" title="Setup Amazon Macie for data discovery &amp; classification" class="md-nav__link">
-    Setup Amazon Macie for data discovery &amp; classification
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#enable-aws-security-hub" title="Enable AWS Security Hub" class="md-nav__link">
     Enable AWS Security Hub
   </a>
@@ -576,7 +548,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/edit/master/docs/01-environment-setup.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/tree/EventEngine/edit/master/docs/01-environment-setup.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                 <h1 id="module-1-environment-build-and-configuration">Module 1: Environment build and configuration</h1>
@@ -716,44 +688,35 @@ Click <strong>Configure details</strong> at the bottom.</p>
 </li>
 </ol>
 <p>GuardDuty is now enabled and continuously monitoring your CloudTrail logs, VPC flow logs, and DNS Query logs for threats in your environment.</p>
-<h2 id="enable-amazon-macie">Enable Amazon Macie</h2>
-<p>Since you plan on storing sensitive data in S3, let’s quickly enable Amazon Macie.  Macie is a security service that will continuously monitor data access activity for anomalies and generate alerts when it detects risk of unauthorized access or inadvertent data leaks.</p>
-<ol>
-<li>
-<p>Go to the <a href="https://us-west-2.redirection.macie.aws.amazon.com/" target="_blank">Amazon Macie</a> console (us-west-2).</p>
-</li>
-<li>
-<p>Click <strong>Get Started</strong>.</p>
-</li>
-<li>
-<p>Macie will create a service-linked role when you enable it. If you would like to see the permissions that the role will have you can click the <strong>View service role permissions</strong>.</p>
-</li>
-<li>
-<p>Click <strong>Enable Macie</strong>.</p>
-</li>
-</ol>
-<h2 id="setup-amazon-macie-for-data-discovery-classification">Setup Amazon Macie for data discovery &amp; classification</h2>
-<p>Macie is also used for automatically discovering and classifying sensitive data.  Now that Macie is enabled, setup an integration to classify data in your S3 bucket.</p>
-<ol>
-<li>
-<p>In the Amazon Macie console click on <strong>Integrations</strong> on the left navigation.</p>
-</li>
-<li>
-<p>Find your AWS account ID (there should be only one) and click <strong>Select</strong> </p>
-</li>
-<li>
-<p>Click <strong>Add</strong> then on the next screen click the check box next to the S3 bucket that ends with <strong>“-data”</strong>. Click <strong>Add</strong></p>
-</li>
-<li>
-<p>Leave the options here at the default, click <strong>Review</strong>.</p>
-</li>
-<li>
-<p>On the next screen click <strong>Start Classification</strong>. </p>
-</li>
-<li>
-<p>Finally click <strong>Done</strong>. Macie is now enabled and has begun to discover, classify and protect your data.</p>
-</li>
-</ol>
+<!-- ## Enable Amazon Macie
+
+Since you plan on storing sensitive data in S3, let’s quickly enable Amazon Macie.  Macie is a security service that will continuously monitor data access activity for anomalies and generate alerts when it detects risk of unauthorized access or inadvertent data leaks.
+
+1.  Go to the <a href="https://us-west-2.redirection.macie.aws.amazon.com/" target="_blank">Amazon Macie</a> console (us-west-2).
+
+2.  Click **Get Started**.
+
+3.  Macie will create a service-linked role when you enable it. If you would like to see the permissions that the role will have you can click the **View service role permissions**.
+
+4.  Click **Enable Macie**.
+
+## Setup Amazon Macie for data discovery & classification
+
+Macie is also used for automatically discovering and classifying sensitive data.  Now that Macie is enabled, setup an integration to classify data in your S3 bucket.
+
+1.  In the Amazon Macie console click on **Integrations** on the left navigation.
+
+3.  Find your AWS account ID (there should be only one) and click **Select** 
+
+4.  Click **Add** then on the next screen click the check box next to the S3 bucket that ends with **“-data”**. Click **Add**
+
+5. Leave the options here at the default, click **Review**.
+
+6. On the next screen click **Start Classification**. 
+
+6. Finally click **Done**. Macie is now enabled and has begun to discover, classify and protect your data.
+-->
+
 <h2 id="enable-aws-security-hub">Enable AWS Security Hub</h2>
 <p>Now that all of your detective controls have been configured you need to enable <a href="https://aws.amazon.com/security-hub/" target="_blank">AWS Security Hub</a>, which will provide you with a comprehensive view of the security and compliance of your AWS environment.</p>
 <ol>

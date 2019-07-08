@@ -13,7 +13,7 @@
         <meta name="description" content="This hands-on workshop is where you will learn about a number of AWS services involved with threat detection and response as we walk through real-world threat scenarios. Learn about the threat detection capabilities of Amazon GuardDuty, Amazon Macie and AWS Security Hub and the available response options. For each hands-on scenario, we review methods to detect and respond to threats using the following services: AWS CloudTrail, Amazon VPC flow logs, Amazon CloudWatch Events, Amazon Macie, AWS Lambda, Amazon Inspector, Amazon GuardDuty and Amazon Security Hub.">
       
       
-        <link rel="canonical" href="https://scaling-threat-detection.awssecworkshops.com/04-review-and-discussion/">
+        <link rel="canonical" href="http://www.woodhome.com/04-review-and-discussion/">
       
       
         <meta name="author" content="aws-security-workshops@amazon.com">
@@ -205,7 +205,7 @@
 
   
 
-<a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/tree/EventEngine/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -214,7 +214,7 @@
     </div>
   
   <div class="md-source__repository">
-    aws-samples/aws-scaling-threat-detection-workshop
+    awsrossw/aws-scaling-threat-detection-workshop
   </div>
 </a>
             </div>
@@ -292,7 +292,7 @@
 
   <!-- Site title -->
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://scaling-threat-detection.awssecworkshops.com/"
+    <a href="http://www.woodhome.com/"
         title="Scaling threat detection and response in AWS" class="md-nav__button md-logo">
       
         <img src="../assets/images/aws_smile_logo.png" width="48" height="48" />
@@ -309,7 +309,7 @@
 
   
 
-<a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/tree/EventEngine/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -318,7 +318,7 @@
     </div>
   
   <div class="md-source__repository">
-    aws-samples/aws-scaling-threat-detection-workshop
+    awsrossw/aws-scaling-threat-detection-workshop
   </div>
 </a>
     </div>
@@ -534,7 +534,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/edit/master/docs/04-review-and-discussion.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/tree/EventEngine/edit/master/docs/04-review-and-discussion.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                 <h1 id="module-4-review-and-discussion">Module 4: Review and Discussion</h1>
@@ -550,7 +550,7 @@
 </ol>
 <h2 id="architecture-overview">Architecture Overview</h2>
 <p>Below is a diagram of the overall workshop setup:
-<img alt="Part 1 Diagram" src="../images/03-diagram-attack-v2.png" /></p>
+<img alt="Part 1 Diagram" src="./images/03-diagram-attack-v2.png" /></p>
 <h2 id="what-is-really-going-on">What is Really Going On?</h2>
 <p>In <strong>Module 1</strong> of the workshop you setup the initial components of your infrastructure including detective controls such as GuardDuty, Inspector, SecurityHub as well as simple notification and remediation pipeline. Some of the steps required manual configuration but you also ran a CloudFormation template which setup some of the components. </p>
 <p>In <strong>Module 2</strong> you launched a second CloudFormation template that initiated the attack simulated by this workshop. The CloudFormation template created two EC2 instances. One instance (named <strong>Malicious Host</strong>) had an EIP attached to it that was added to your GuardDuty custom threat list. Although the <strong>Malicious Host</strong> is in the same VPC as the other instance, for the sake of the scenario (and to prevent the need to submit a penetration testing request) we acted as if it is on the Internet and represented the attack's computer. The other instance (named <strong>Compromised Instance</strong>) was your web server and it was taken over by the <strong>Malicious Host</strong>. </p>
@@ -575,12 +575,13 @@
 <p class="admonition-title">Successful login is confirmed in CloudWatch Logs (/threat-detection-wksp/var/log/secure).</p>
 </div>
 </li>
-<li>
-<p>The EC2 Instance that is created in the <strong>Module</strong> 2 CloudFormation template disabled default encryption on the <strong>Data</strong> bucket.  In addition the CloudFormation template made the <strong>Data</strong> bucket public.  This is used for the Macie part of the investigation in Module 3. We pretend that the attacker made the bucket public and removed the default encryption from the bucket.</p>
-<div class="admonition info">
-<p class="admonition-title"><strong>Macie Alert</strong>: S3 Bucket IAM policy grants global read rights.</p>
-</div>
-</li>
+</ol>
+<!-- 5. The EC2 Instance that is created in the **Module** 2 CloudFormation template disabled default encryption on the **Data** bucket.  In addition the CloudFormation template made the **Data** bucket public.  This is used for the Macie part of the investigation in Module 3. We pretend that the attacker made the bucket public and removed the default encryption from the bucket.
+
+    !!! info "**Macie Alert**: S3 Bucket IAM policy grants global read rights."
+-->
+
+<ol>
 <li>
 <p>The Compromised Instance also has a cron job that continuously pings the Malicious Host to generate a GuardDuty finding based off the custom threat list.</p>
 <div class="admonition info">
@@ -596,8 +597,8 @@
 <li>
 <p>A number of CloudWatch Events Rules are evoked by the GuardDuty findings and then these trigger various services.</p>
 <ol>
-<li><strong>CloudWatch Event Rule</strong>: The generic GuardDuty finding invokes a CloudWatch Event rule which triggers SNS to send an email.</li>
-<li><strong>CloudWatch Event Rule</strong>: The generic Macie alert invokes a CloudWatch Event rule which triggers SNS to send an email.</li>
+<li><strong>CloudWatch Event Rule</strong>: The generic GuardDuty finding invokes a CloudWatch Event rule which triggers SNS to send an email.
+<!-- 2. **CloudWatch Event Rule**: The generic Macie alert invokes a CloudWatch Event rule which triggers SNS to send an email. --></li>
 <li><strong>CloudWatch Event Rule</strong>: The SSH brute force attack finding invokes a CloudWatch Event rule which triggers a Lambda function to block the attacker IP address of the attacker via a NACL as well as a Lambda function that runs an Inspector scan on the EC2 instance.</li>
 <li><strong>CloudWatch Event Rule</strong>: The Unauthorized Access Custom MaliciousIP finding invokes a CloudWatch Event rule which triggers a Lambda function to block the IP address of the attacker via a NACL.</li>
 </ol>
