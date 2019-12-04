@@ -13,7 +13,7 @@
         <meta name="description" content="This hands-on workshop is where you will learn about a number of AWS services involved with threat detection and response as we walk through real-world threat scenarios. Learn about the threat detection capabilities of Amazon GuardDuty, Amazon Macie and AWS Security Hub and the available response options. For each hands-on scenario, we review methods to detect and respond to threats using the following services: AWS CloudTrail, Amazon VPC flow logs, Amazon CloudWatch Events, Amazon Macie, AWS Lambda, Amazon Inspector, Amazon GuardDuty and Amazon Security Hub.">
       
       
-        <link rel="canonical" href="https://automating-threat-detection.awssecworkshops.com/01-environment-setup/">
+        <link rel="canonical" href="https://automating-threat-detection.awssecworkshops.com/05-reinvent-detective/">
       
       
         <meta name="author" content="aws-security-workshops@amazon.com">
@@ -42,7 +42,7 @@
     
     
       
-        <title>Module 1: Environment Build - Scaling threat detection and response in AWS</title>
+        <title>Module 5: re:invent 2019  - Scaling threat detection and response in AWS</title>
       
     
     
@@ -85,7 +85,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#module-1-environment-build-and-configuration" tabindex="1" class="md-skip">
+      <a href="#module-5-amazon-detective" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -143,7 +143,7 @@
                   Scaling threat detection and response in AWS
                 </span>
                 <span class="md-header-nav__topic">
-                  Module 1: Environment Build
+                  Module 5: re:invent 2019 
                 </span>
               
             
@@ -345,77 +345,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Module 1: Environment Build
-      </label>
-    
-    <a href="./" title="Module 1: Environment Build" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../01-environment-setup/" title="Module 1: Environment Build" class="md-nav__link">
       Module 1: Environment Build
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#deploy-the-aws-cloudformation-template" title="Deploy the AWS CloudFormation template" class="md-nav__link">
-    Deploy the AWS CloudFormation template
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setup-amazon-cloudwatch-event-rules-and-automatic-response" title="Setup Amazon CloudWatch event rules and automatic response" class="md-nav__link">
-    Setup Amazon CloudWatch event rules and automatic response
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable-amazon-guardduty" title="Enable Amazon GuardDuty" class="md-nav__link">
-    Enable Amazon GuardDuty
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable-aws-security-hub" title="Enable AWS Security Hub" class="md-nav__link">
-    Enable AWS Security Hub
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#architecture-overview" title="Architecture overview" class="md-nav__link">
-    Architecture overview
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -459,11 +393,84 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../05-reinvent-detective/" title="Module 5: re:invent 2019" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Module 5: re:invent 2019 
+      </label>
+    
+    <a href="./" title="Module 5: re:invent 2019" class="md-nav__link md-nav__link--active">
       Module 5: re:invent 2019 
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#switch-roles-to-detective-demo-account" title="Switch Roles to Detective Demo account" class="md-nav__link">
+    Switch Roles to Detective Demo account
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-region" title="Change Region" class="md-nav__link">
+    Change Region
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-with-amazon-guardduty" title="Start with Amazon GuardDuty" class="md-nav__link">
+    Start with Amazon GuardDuty
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#investigate-with-amazon-detective" title="Investigate with Amazon Detective" class="md-nav__link">
+    Investigate with Amazon Detective
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-did-you-find-prizes" title="What did you find = Prizes!" class="md-nav__link">
+    What did you find = Prizes!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-happened-during-the-scenario" title="What happened during the scenario?" class="md-nav__link">
+    What happened during the scenario?
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -512,36 +519,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#deploy-the-aws-cloudformation-template" title="Deploy the AWS CloudFormation template" class="md-nav__link">
-    Deploy the AWS CloudFormation template
+  <a href="#switch-roles-to-detective-demo-account" title="Switch Roles to Detective Demo account" class="md-nav__link">
+    Switch Roles to Detective Demo account
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#setup-amazon-cloudwatch-event-rules-and-automatic-response" title="Setup Amazon CloudWatch event rules and automatic response" class="md-nav__link">
-    Setup Amazon CloudWatch event rules and automatic response
+  <a href="#change-region" title="Change Region" class="md-nav__link">
+    Change Region
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable-amazon-guardduty" title="Enable Amazon GuardDuty" class="md-nav__link">
-    Enable Amazon GuardDuty
+  <a href="#start-with-amazon-guardduty" title="Start with Amazon GuardDuty" class="md-nav__link">
+    Start with Amazon GuardDuty
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable-aws-security-hub" title="Enable AWS Security Hub" class="md-nav__link">
-    Enable AWS Security Hub
+  <a href="#investigate-with-amazon-detective" title="Investigate with Amazon Detective" class="md-nav__link">
+    Investigate with Amazon Detective
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-overview" title="Architecture overview" class="md-nav__link">
-    Architecture overview
+  <a href="#what-did-you-find-prizes" title="What did you find = Prizes!" class="md-nav__link">
+    What did you find = Prizes!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-happened-during-the-scenario" title="What happened during the scenario?" class="md-nav__link">
+    What happened during the scenario?
   </a>
   
 </li>
@@ -562,193 +576,111 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/tree/EventEngine/edit/master/docs/01-environment-setup.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/tree/EventEngine/edit/master/docs/05-reinvent-detective.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="module-1-environment-build-and-configuration">Module 1: Environment build and configuration</h1>
-<p>In this first module you will be configuring detective and responsive controls for your environment.  You will be running the first of two CloudFormation templates which will automate the creation of some of these controls and then you will manually configure the rest. Log into the AWS Console if you have not done so already.</p>
+                <h1 id="module-5-amazon-detective">Module 5: Amazon Detective</h1>
+<p>This is a re:invent 2019 only module. For the rest of this session you will have hands on time with the new investigative service, <strong>Amazon Detective</strong>, that is currently in gated preview. </p>
+<p><strong>Note</strong> This module is separate from each of the previous modules and involves separate infrastructure, accounts and attack vectors, but do not log out of the account you were using. </p>
 <p><strong>Agenda</strong></p>
 <ol>
-<li>Run the intial CloudFormation Template – 5 min</li>
-<li>Confirm SNS subscription in your email - 1 min</li>
-<li>Create a CloudWatch Rule - 5 min</li>
-<li>Manually Enable detective controls - 5 min</li>
+<li>Switch Roles to Demo Account</li>
+<li>Start with a Amazon GuardDuty finding</li>
+<li>Investigate with Amazon Detective</li>
+<li>What did you find = Prizes!</li>
+<li>What happened ? - Scenario discussion</li>
 </ol>
-<h2 id="deploy-the-aws-cloudformation-template">Deploy the AWS CloudFormation template</h2>
-<p>To initiate the scenario and configure your environment you will need to run the module 1 CloudFormation template: </p>
+<h3 id="switch-roles-to-detective-demo-account">Switch Roles to Detective Demo account</h3>
+<p>In same browser were you are logged in, go this URL:</p>
+<p><nobr><a href="https://signin.aws.amazon.com/switchrole?roleName=WorkshopReadOnly&amp;account=549639478491">https://signin.aws.amazon.com/switchrole?roleName=WorkshopReadOnly&amp;account=549639478491</a></nobr></p>
+<p><img alt="SwitchRole" src="../images/05-switchrolelogin.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Attention: Multiple Roles available</p>
+<p>You will need to change <code>WorkshopReadOnly</code> to one of the following
+ <code>WorkshopReadOnly-1</code>
+ <code>WorkshopReadOnly-2</code>
+ <code>WorkshopReadOnly-3</code>
+ You may have to try more than one role.</p>
+</div>
+<p>After you make the changes to <code>Role</code> Click <code>Switch Role</code> to login to that role in the Demo Account. You may have to try more than one role.</p>
+<h3 id="change-region">Change Region</h3>
+<p>Amazon detective is only available in 5 regions at launch. For this workshop you will be using the <code>US East (N. Virginia)us-east-1</code> region, please select this region from the dropdown in the upper right hand of your AWS Console.</p>
+<h3 id="start-with-amazon-guardduty">Start with Amazon GuardDuty</h3>
+<p>You will initiate your investigation from an AWS detection source, in this case, Amazon GuardDuty. As a security analyst you will be familiar with multiple attack vectors, but for this scenario, we are going to start with a high severity cryptocurrency finding and pivot into Detective to leverage it’s analytical power to discover the scope and depth of an attacker’s foothold in your workloads.</p>
 <div class="admonition info">
-<p class="admonition-title">Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/blob/EventEngine/templates/01-environment-setup-nom.yml" target="_blank">here</a href>.</p>
+<p class="admonition-title">You can do this section at your own pace or follow along with the presenter</p>
 </div>
-<table>
-<thead>
-<tr>
-<th>Region</th>
-<th>Deploy</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>US West 2 (Oregon)</td>
-<td><a href="https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=ThreatDetectionWksp-Env-Setup&templateURL=https://s3-us-west-2.amazonaws.com/sa-security-specialist-workshops-us-west-2/threat-detect-workshop/staging/01-environment-setup-nom.yml" target="_blank"><img alt="Deploy Module 1 in us-west-2" src="../images/deploy-to-aws.png" /></a></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>
-<p>Click the <strong>Deploy to AWS</strong> button above.  This will automatically take you to the console to run the template, click Next to get to the Specify Details page. </p>
-</li>
-<li>
-<p>On the <strong>Specify Details</strong> section enter the necessary parameters as shown below. </p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Stack name</td>
-<td>ThreatDetectionWksp-Env-Setup</td>
-</tr>
-<tr>
-<td>Email Address</td>
-<td>Any valid email address you have access to</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Once you have entered your parameters click <strong>Next</strong>, </p>
-</li>
-<li>
-<p>Click <strong>Next</strong> again. (leave everything on this page at the default)</p>
-</li>
-<li>
-<p>Finally, scroll down and check the box to acknowledge that the template will create IAM roles and click <strong>Create</strong>.</p>
-</li>
-</ol>
-<p><img alt="IAM Capabilities" src="../images/iam-capabilities.png" /></p>
-<p>This will bring you back to the CloudFormation console. You can refresh the page to see the stack starting to create. Before moving on, make sure the stack is in a <strong>CREATE_COMPLETE</strong> status as shown below.</p>
-<p><img alt="Stack Complete" src="../images/01-stack-complete.png" /></p>
+<p>Go to the GuardDuty console and select the <code>Crypto_Mining_Finding_Types</code> saved filter from the drop down menu in the upper right hand corner. Select, click the checkbox, for the <code>CryptoCurrency:EC2/BitcoinTool.B</code> finding with the resource that has <nobr><code>i-0441b8673fab0f671</code></nobr> as the instance ID.</p>
+<p>Finally, using the <code>Actions</code> tab, select the drop down and select <code>Investigate</code>. </p>
+<p><img alt="Investigate" src="../images/05-01-Investigate.png" /></p>
+<p>You are now utilizing the deep integration between the various AWS security services to pivot from GuardDuty as your entry point into Detective. </p>
 <div class="admonition info">
-<p class="admonition-title">Do not forget to check your email!</p>
+<p class="admonition-title">Remember we are playing the part of a security analyst. Take good notes.</p>
 </div>
-<p>You will get an email from SNS asking you to confirm the Subscription. <strong>Confirm the subscription</strong> so you can receive email alerts from AWS services during the workshop. The email may take 2-3 minutes to arrive, check your spam/junk folder if it doesn’t arrive within that timeframe.</p>
-<h2 id="setup-amazon-cloudwatch-event-rules-and-automatic-response">Setup Amazon CloudWatch event rules and automatic response</h2>
-<p>The CloudFormation template you just ran created <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html" target="_blank">CloudWatch Event Rules</a> for alerting and response purposes. The steps below will walk you through creating the final rule.  After this you'll have rules in place to receive email notifications and trigger AWS Lambda functions to respond to threats.</p>
-<p>Below are steps to create a rule through the console but you can also find out more about doing it programmatically by reviewing the <a href="http://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html" target="_blank">Amazon GuardDuty Documentation</a>.</p>
-<ol>
-<li>Open the <a href="https://us-west-2.console.aws.amazon.com/cloudwatch/home?region=us-west-2" target="_blank">CloudWatch console</a> (us-west-2)</li>
-<li>
-<p>In the navigation pane on the left, under <strong>Events</strong>, click <strong>Rules</strong></p>
+<h3 id="investigate-with-amazon-detective">Investigate with Amazon Detective</h3>
+<p>Let's review the finding profile of the selected finding.  Any time you see the small blue <code>info</code> link, next to a panel heading, you can click to enable more information in the right hand sidebar. </p>
+<p><img alt="Finding" src="../images/05-02-Finding1.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Review the information in GuardDuty finding details panel, instance details.</p>
+</div>
 <div class="admonition question">
-<p class="admonition-title">What are the current Rules in place setup to do?</p>
+<p class="admonition-title">Did you notice the 'Edit' button next to scope time? This will be important very soon!</p>
 </div>
-</li>
-<li>
-<p>Click <strong>Create Rule</strong></p>
-</li>
-<li>
-<p>Select <strong>Event Pattern</strong> click the dropdown labeled <strong>Build event pattern to match events by service</strong> and 
-select <strong>Custom event pattern</strong> in the drop down.</p>
-</li>
-</ol>
-<p>Copy and paste in the custom event pattern below:</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;source&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&quot;aws.guardduty&quot;</span>
-  <span class="p">],</span>
-  <span class="nt">&quot;detail&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;UnauthorizedAccess:EC2/MaliciousIPCaller.Custom&quot;</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<ol>
-<li>
-<p>For <em>Targets</em>, click <strong>Add Target</strong>, select <strong>Lambda Function</strong>, and then select <strong>threat-detection-wksp-remediation-nacl</strong>. 
-Click <strong>Configure details</strong> at the bottom.</p>
-</li>
-<li>
-<p>On the <strong>Configure rule details</strong> screen fill out the <strong>Name</strong> and <strong>Description</strong> (suggestions below).</p>
-<ul>
-<li>Name: <strong>threat-detection-wksp-guardduty-finding-ec2-maliciousip</strong></li>
-<li>Description: <strong>GuardDuty Finding: UnauthorizedAccess:EC2/MaliciousIPCaller.Custom</strong></li>
-</ul>
-</li>
-<li>
-<p>Click <strong>Create rule</strong>.
-<strong>Optional:</strong> Consider examining the Lambda function to see what it does.  Open the <a href="https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2" target="_blank">Lambda console</a>. Click on the function named <strong>threat-detection-wksp-remediation-nacl</strong></p>
-<div class="admonition question">
-<p class="admonition-title">What will the function do when invoked?</p>
+<p>Scroll down to the <code>Findings associated with Ec2Instance</code> panel.</p>
+<p><img alt="Associated" src="../images/05-03-Associated.png" /></p>
+<p>As a security analysts we are always interested what other findings are associated with the resources we are investigating, this is just one part of enabling a unified view of user and resource interactions over time.</p>
+<p>Next Scroll down to <code>Overall VPCflow</code> panel click on the <code>info</code> link for an explanation of what you are seeing in the panel.</p>
+<p><img alt="IPAddress" src="../images/05-04-IPAddress.png" />
+We are looking at the VPCflow volume for this specific instance. Observe that there is a relatively short time period of volume based on the what we observe in the time series panel data.  Most likely this instance was recently spun up.</p>
+<p>Scroll back up to the top of the page and click on the <code>VPC flow details</code> tab.  Take note of the <code>Remote IP address</code> in this panel. <!--and explain that we are looking at any IP addresses associated with this finding.  Take a note of the IP address and add it to our analyst notes.  We want to include any IoCs in our investigation and keep track of all impacted resource. --></p>
+<p>Let's now determine if any other instances are communicating with this IP address.  Right click on the IP address and open the link in a different tab.  Here we are trying to scope the depth and breath of what other footholds the attacker might have in your network.</p>
+<p><img alt="IPAddress2" src="../images/05-05-IPAddress2.png" /></p>
+<p>After switching to the new browser tab, scroll down to the <code>Findings associated with IP address</code> panel, we observe additional findings related with this IP address.  In your investigation you should note any other instances that are talking to this bitcoin mining IP address for a possible secondary investigation. <!--(Note: The Findings associated with IP address panel currently shows historical GuardDuty findings even the ones I archived).  --></p>
+<p><img alt="IPDetails" src="../images/05-06-IPAddressdetails.png" /></p>
+<p>After you have written down all of the instances impacted in the current investigation, we will want to determine the credentials used to spin up these instances.  On our original browser tab, go back to the <code>Overview tab</code> and scroll down to the <code>EC2 instance details</code> panel and look for the <code>Created by</code> field.  This shows us what role was associated with this finding and what user’s credentials might have been compromised. <!--(Note:  We will need to explain that the naming convention for the role is associated with AWS SSO roles and is also a federated role type.)
+--></p>
+<p><img alt="SSOROle" src="../images/05-07-SSORole.png" /></p>
+<p>It is important to realize that we are pivoting from a VPCflow data source (IP Addresses information) to a Cloudtrail data source (EC2 Instance Created By Role information). Amazon Detective makes this simple, seamless transition by having access to the metadata associated with the each data source.</p>
+<p>Right click on the link under the <code>Created by</code> header and open in a new tab.</p>
+<p>On the <code>Role details</code> panel scroll down to the <code>Overall API call volume</code> panel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note: There is activity before the current scoping time.  The current timeframe includes the past 24 hours but by using the time series graph we can focus our investigation to include a select time window of the activity</p>
 </div>
-</li>
-</ol>
-<h2 id="enable-amazon-guardduty">Enable Amazon GuardDuty</h2>
-<p>The next step is to enable Amazon GuardDuty, which will continuously monitor your environment for malicious or unauthorized behavior.</p>
-<ol>
-<li>
-<p>Go to the <a href="https://us-west-2.console.aws.amazon.com/guardduty/home?region=us-west-2" target="_blank">Amazon GuardDuty</a> console (us-west-2).</p>
-</li>
-<li>
-<p>Click the <strong>Get Started</strong> button.</p>
-</li>
-<li>
-<p>On the next screen click the <strong>Enable GuardDuty</strong> button.</p>
-</li>
-</ol>
-<p>GuardDuty is now enabled and continuously monitoring your CloudTrail logs, VPC flow logs, and DNS Query logs for threats in your environment.</p>
-<!-- ## Enable Amazon Macie
+<!--Explain the time series graph with the black box which means that our current time frame needs to be expanded to include all activity.!-->
 
-Since you plan on storing sensitive data in S3, let’s quickly enable Amazon Macie.  Macie is a security service that will continuously monitor data access activity for anomalies and generate alerts when it detects risk of unauthorized access or inadvertent data leaks.
+<p>We will increase the scope time of this investigation to include some of the previous activity and then lock the time frame with the toggle so the scope time persists during the rest of the investigation. </p>
+<p><img alt="Text" src="../images/05-09-RoleFindings.png" /></p>
+<p>Click on the <code>Edit</code> button right below <code>Scope time</code> in the upper right hand corner and change the <code>Start</code> window to <strong><em><code>2019/11/14</code></em></strong>, toggle the lock slider and select <code>Update scope time</code></p>
+<p><img alt="ScopeTime" src="../images/05-scopetime.png" /></p>
+<p>We can now see there are additional findings associated with this user role after expanding our time frame. Note the expanded black box in the <code>Overall API call volume</code> panel.
+<img alt="Text" src="../images/05-11-Scopetime-Findings.png" /></p>
+<p>Our next step is to determine if there is any new behavior with this user role.  </p>
+<p>Select the <code>New Behavior</code> tab and observe the <code>Newly observed geolocations</code> and what it is showing.</p>
+<p><img alt="Text" src="../images/05-12-Geolocations-Map.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Take note of the Newly observed and Previously observed highlights and the actual locations (Ukraine, Estonia, and Romania)</p>
+</div>
+<p>By selecting one of the circles on the map or selecting the <code>Details</code> link on the right hand side of the panel, observe the IP addresses associated with each country and take a note of them in your analyst notes.  We use these IP addresses as Indicators of Compromise (IoCs) in our investigation of Cloudtail logs. </p>
+<!--![Text](./images/05-13-Geolocations-Map-Drilldown.png)-->
 
-1.  Go to the <a href="https://us-west-2.redirection.macie.aws.amazon.com/" target="_blank">Amazon Macie</a> console (us-west-2).
-
-2.  Click **Get Started**.
-
-3.  Macie will create a service-linked role when you enable it. If you would like to see the permissions that the role will have you can click the **View service role permissions**.
-
-4.  Click **Enable Macie**.
-
-## Setup Amazon Macie for data discovery & classification
-
-Macie is also used for automatically discovering and classifying sensitive data.  Now that Macie is enabled, setup an integration to classify data in your S3 bucket.
-
-1.  In the Amazon Macie console click on **Integrations** on the left navigation.
-
-3.  Find your AWS account ID (there should be only one) and click **Select** 
-
-4.  Click **Add** then on the next screen click the check box next to the S3 bucket that ends with **“-data”**. Click **Add**
-
-5. Leave the options here at the default, click **Review**.
-
-6. On the next screen click **Start Classification**. 
-
-6. Finally click **Done**. Macie is now enabled and has begun to discover, classify and protect your data.
--->
-
-<h2 id="enable-aws-security-hub">Enable AWS Security Hub</h2>
-<p>Now that all of your detective controls have been configured you need to enable <a href="https://aws.amazon.com/security-hub/" target="_blank">AWS Security Hub</a>, which will provide you with a comprehensive view of the security and compliance of your AWS environment.</p>
-<ol>
-<li>
-<p>Go to the <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#" target="_blank">AWS Security Hub</a> console.</p>
-</li>
-<li>
-<p>Click the <strong>Enable Security Hub</strong> button.</p>
-</li>
-<li>
-<p>On the next screen click the <strong>Enable AWS Security Hub</strong> button.</p>
-</li>
-</ol>
-<p>AWS Security Hub is now enabled and will begin collecting and aggregating findings from the security services we have enabled so far.</p>
-<h2 id="architecture-overview">Architecture overview</h2>
-<p>Your environment is now configured and ready for operations.  Below is a diagram to depict the detective controls you now have in place.</p>
-<p><img alt="Detective Controls" src="../images/01-diagram-modulev2.png" /></p>
-<p>After you have successfully setup your environment, you can proceed to the next module.</p>
+<p><img alt="Text" src="../images/05-14-Geolocations-APICalls.png" /></p>
+<p>This a great time to checkout some of the API calls in this timeframe that are associated with these IP addresses.  Observe the impacted resources/services but not we don’t need them to write them down for this workshop.</p>
+<p>Next, we are going to take a look at <code>Newly observed user agents</code> panel down at the very bottom of this AWS Role page.</p>
+<p>Take note of the super suspicious user agent and expand out the time series graph to determine the timeframe of activity.  The activity aligns with our current scoping time so we don’t need to adjust it further. </p>
+<p><img alt="Text" src="../images/05-15-Geolocations-UserAgent.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Are all these User Agents legitimate? Or do some look suspicious? Remember take good notes.</p>
+</div>
+<p>Next open the <code>Im the adversary. Catch me if you can</code> user agent in a new tab, by right clicking and selecting 'Open Link in new Tab'.  Here we are once again pivoting on another field in the Cloudtrail metadata source to get any other IoCs or impacted resources. </p>
+<p><img alt="Text" src="../images/05-16-CatchMe.png" /></p>
+<p>Once we pivot over to the user agent panel, select the <code>Resource interaction</code> tab and take note of the activity.  Notice that there appears to be more than one impacted user.  Most likely an indication that the attacker created a user(s) with long lived credentials for persistence in your environment.</p>
+<p><img alt="Text" src="../images/05-17-CatchMe-Resources.png" /></p>
+<h3 id="what-did-you-find-prizes">What did you find = Prizes!</h3>
+<p>Be prepared to discuss what IoCs you found:
+ Any suspicious IP Addresses, User agents, instance IDs or users</p>
+<h3 id="what-happened-during-the-scenario">What happened during the scenario?</h3>
+<details class="note"><summary>Are you curious about what happened, open this drop down</summary><p><img alt="What" src="../images/05-whathappend.png" /></p>
+</details>
                 
                   
                 
@@ -769,7 +701,7 @@ Macie is also used for automatically discovering and classifying sensitive data.
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../04-review-and-discussion/" title="Module 4: Discussion" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -778,19 +710,19 @@ Macie is also used for automatically discovering and classifying sensitive data.
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Overview
+                Module 4: Discussion
               </span>
             </div>
           </a>
         
         
-          <a href="../02-attack-simulation/" title="Module 2: Attack Simulation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../contribute/" title="Contributing" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Module 2: Attack Simulation
+                Contributing
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
