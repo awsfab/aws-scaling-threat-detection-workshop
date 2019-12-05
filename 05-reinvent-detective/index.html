@@ -593,16 +593,17 @@
 <h3 id="switch-roles-to-detective-demo-account">Switch Roles to Detective Demo account</h3>
 <p>In same browser were you are logged in, go this URL:</p>
 <p><nobr><a href="https://signin.aws.amazon.com/switchrole?roleName=WorkshopReadOnly&amp;account=549639478491">https://signin.aws.amazon.com/switchrole?roleName=WorkshopReadOnly&amp;account=549639478491</a></nobr></p>
-<p><img alt="SwitchRole" src="../images/05-switchrolelogin.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Attention: Multiple Roles available</p>
 <p>You will need to change <code>WorkshopReadOnly</code> to one of the following
  <code>WorkshopReadOnly-1</code>
  <code>WorkshopReadOnly-2</code>
  <code>WorkshopReadOnly-3</code>
+ <code>WorkshopReadOnly-4</code>
  You may have to try more than one role.</p>
 </div>
-<p>After you make the changes to <code>Role</code> Click <code>Switch Role</code> to login to that role in the Demo Account. You may have to try more than one role.</p>
+<p><img alt="SwitchRole" src="../images/05-switchrolelogin.png" /></p>
+<p>After you make the changes to the <code>Role</code> field, click <code>Switch Role</code> to login to that role in the Demo Account. You may have to try more than one role.</p>
 <h3 id="change-region">Change Region</h3>
 <p>Amazon detective is only available in 5 regions at launch. For this workshop you will be using the <code>US East (N. Virginia)us-east-1</code> region, please select this region from the dropdown in the upper right hand of your AWS Console.</p>
 <h3 id="start-with-amazon-guardduty">Start with Amazon GuardDuty</h3>
@@ -664,7 +665,7 @@ We are looking at the VPCflow volume for this specific instance. Observe that th
 <!--![Text](./images/05-13-Geolocations-Map-Drilldown.png)-->
 
 <p><img alt="Text" src="../images/05-14-Geolocations-APICalls.png" /></p>
-<p>This a great time to checkout some of the API calls in this timeframe that are associated with these IP addresses.  Observe the impacted resources/services but not we don’t need them to write them down for this workshop.</p>
+<p>This is a great time to checkout some of the API calls in this timeframe that are associated with these IP addresses.  Observe the impacted resources/services but not we don’t need them to write them down for this workshop.</p>
 <p>Next, we are going to take a look at <code>Newly observed user agents</code> panel down at the very bottom of this AWS Role page.</p>
 <p>Take note of the super suspicious user agent and expand out the time series graph to determine the timeframe of activity.  The activity aligns with our current scoping time so we don’t need to adjust it further. </p>
 <p><img alt="Text" src="../images/05-15-Geolocations-UserAgent.png" /></p>

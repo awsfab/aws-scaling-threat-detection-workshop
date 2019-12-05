@@ -374,6 +374,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#enable-amazon-guardduty" title="Enable Amazon GuardDuty" class="md-nav__link">
+    Enable Amazon GuardDuty
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#deploy-the-aws-cloudformation-template" title="Deploy the AWS CloudFormation template" class="md-nav__link">
     Deploy the AWS CloudFormation template
   </a>
@@ -383,13 +390,6 @@
         <li class="md-nav__item">
   <a href="#setup-amazon-cloudwatch-event-rules-and-automatic-response" title="Setup Amazon CloudWatch event rules and automatic response" class="md-nav__link">
     Setup Amazon CloudWatch event rules and automatic response
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable-amazon-guardduty" title="Enable Amazon GuardDuty" class="md-nav__link">
-    Enable Amazon GuardDuty
   </a>
   
 </li>
@@ -512,6 +512,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#enable-amazon-guardduty" title="Enable Amazon GuardDuty" class="md-nav__link">
+    Enable Amazon GuardDuty
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#deploy-the-aws-cloudformation-template" title="Deploy the AWS CloudFormation template" class="md-nav__link">
     Deploy the AWS CloudFormation template
   </a>
@@ -521,13 +528,6 @@
         <li class="md-nav__item">
   <a href="#setup-amazon-cloudwatch-event-rules-and-automatic-response" title="Setup Amazon CloudWatch event rules and automatic response" class="md-nav__link">
     Setup Amazon CloudWatch event rules and automatic response
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable-amazon-guardduty" title="Enable Amazon GuardDuty" class="md-nav__link">
-    Enable Amazon GuardDuty
   </a>
   
 </li>
@@ -569,11 +569,19 @@
 <p>In this first module you will be configuring detective and responsive controls for your environment.  You will be running the first of two CloudFormation templates which will automate the creation of some of these controls and then you will manually configure the rest. Log into the AWS Console if you have not done so already.</p>
 <p><strong>Agenda</strong></p>
 <ol>
-<li>Run the intial CloudFormation Template – 5 min</li>
+<li>Run the initial CloudFormation Template – 5 min</li>
 <li>Confirm SNS subscription in your email - 1 min</li>
 <li>Create a CloudWatch Rule - 5 min</li>
 <li>Manually Enable detective controls - 5 min</li>
 </ol>
+<h2 id="enable-amazon-guardduty">Enable Amazon GuardDuty</h2>
+<p>Our first step is to enable Amazon GuardDuty, which will continuously monitor your environment for malicious or unauthorized behavior.</p>
+<ol>
+<li>Go to the <a href="https://us-west-2.console.aws.amazon.com/guardduty/home?region=us-west-2" target="_blank">Amazon GuardDuty</a> console (us-west-2).</li>
+<li>If the <strong>Get Started</strong> button is available, click it. If not GuardDuty is enabled and skip step three.</li>
+<li>On the next screen click the <strong>Enable GuardDuty</strong> button.</li>
+</ol>
+<p>GuardDuty is now enabled and continuously monitoring your CloudTrail logs, VPC flow logs, and DNS Query logs for threats in your environment.</p>
 <h2 id="deploy-the-aws-cloudformation-template">Deploy the AWS CloudFormation template</h2>
 <p>To initiate the scenario and configure your environment you will need to run the module 1 CloudFormation template: </p>
 <div class="admonition info">
@@ -688,20 +696,6 @@ Click <strong>Configure details</strong> at the bottom.</p>
 </div>
 </li>
 </ol>
-<h2 id="enable-amazon-guardduty">Enable Amazon GuardDuty</h2>
-<p>The next step is to enable Amazon GuardDuty, which will continuously monitor your environment for malicious or unauthorized behavior.</p>
-<ol>
-<li>
-<p>Go to the <a href="https://us-west-2.console.aws.amazon.com/guardduty/home?region=us-west-2" target="_blank">Amazon GuardDuty</a> console (us-west-2).</p>
-</li>
-<li>
-<p>Click the <strong>Get Started</strong> button.</p>
-</li>
-<li>
-<p>On the next screen click the <strong>Enable GuardDuty</strong> button.</p>
-</li>
-</ol>
-<p>GuardDuty is now enabled and continuously monitoring your CloudTrail logs, VPC flow logs, and DNS Query logs for threats in your environment.</p>
 <!-- ## Enable Amazon Macie
 
 Since you plan on storing sensitive data in S3, let’s quickly enable Amazon Macie.  Macie is a security service that will continuously monitor data access activity for anomalies and generate alerts when it detects risk of unauthorized access or inadvertent data leaks.
@@ -734,16 +728,13 @@ Macie is also used for automatically discovering and classifying sensitive data.
 <h2 id="enable-aws-security-hub">Enable AWS Security Hub</h2>
 <p>Now that all of your detective controls have been configured you need to enable <a href="https://aws.amazon.com/security-hub/" target="_blank">AWS Security Hub</a>, which will provide you with a comprehensive view of the security and compliance of your AWS environment.</p>
 <ol>
-<li>
-<p>Go to the <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#" target="_blank">AWS Security Hub</a> console.</p>
-</li>
-<li>
-<p>Click the <strong>Enable Security Hub</strong> button.</p>
-</li>
-<li>
-<p>On the next screen click the <strong>Enable AWS Security Hub</strong> button.</p>
-</li>
+<li>Go to the <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#" target="_blank">AWS Security Hub</a> console.</li>
+<li>If the <strong>Get Started</strong> button is available, click it. If not Security Hub is enabled and skip step three.</li>
+<li>On the next screen click the <strong>Enable AWS Security Hub</strong> button.</li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">If you see red text <code>AWS Config is not enabled on some accounts</code> in the Security Hub Console, you can safely ignore for this workshop.</p>
+</div>
 <p>AWS Security Hub is now enabled and will begin collecting and aggregating findings from the security services we have enabled so far.</p>
 <h2 id="architecture-overview">Architecture overview</h2>
 <p>Your environment is now configured and ready for operations.  Below is a diagram to depict the detective controls you now have in place.</p>
