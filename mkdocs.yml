@@ -5,12 +5,12 @@ site_short_name: Scaling threat detection
 site_description: 'This hands-on workshop is where you will learn about a number of AWS services involved with threat detection and response as we walk through real-world threat scenarios. Learn about the threat detection capabilities of Amazon GuardDuty, Amazon Macie and AWS Security Hub and the available response options. For each hands-on scenario, we review methods to detect and respond to threats using the following services: AWS CloudTrail, Amazon VPC flow logs, Amazon CloudWatch Events, Amazon Macie, AWS Lambda, Amazon Inspector, Amazon GuardDuty and Amazon Security Hub.'
 site_author: 'aws-security-workshops@amazon.com'
 #site_url: 'https://scaling-threat-detection.awssecworkshops.com/'
-#site_url: 'https://awsrossw.github.io/aws-scaling-threat-detection-workshop/'
-site_url: 'https://automating-threat-detection.awssecworkshops.com/'
+site_url: 'https://awsfab.github.io/aws-scaling-threat-detection-workshop/'
+#site_url: 'https://automating-threat-detection.awssecworkshops.com/'
 
 # Repository
-repo_name: 'awsrossw/aws-scaling-threat-detection-workshop'
-repo_url: 'https://github.com/awsrossw/aws-scaling-threat-detection-workshop/tree/EventEngine'
+repo_name: 'awsfab/aws-scaling-threat-detection-workshop'
+repo_url: 'https://github.com/awsfab/aws-scaling-threat-detection-workshop/tree/EventEngine'
 
 # Copyright
 copyright: '&copy; 2019, Amazon Web Services, Inc. or its affiliates. All rights reserved.'
