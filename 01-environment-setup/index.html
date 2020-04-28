@@ -555,6 +555,7 @@
 <p>In this first module you will be configuring detective and responsive controls for your environment.  You will be running the first of two CloudFormation templates which will automate the creation of some of these controls and then you will manually configure the rest. Log into the AWS Console if you have not done so already.</p>
 <p><strong>Agenda</strong></p>
 <ol>
+<li>Enable Amazon Guard Duty - 5 min</li>
 <li>Run the initial CloudFormation Template – 5 min</li>
 <li>Confirm SNS subscription in your email - 1 min</li>
 <li>Create a CloudWatch Rule - 5 min</li>
@@ -564,12 +565,12 @@
 <p>Our first step is to enable Amazon GuardDuty, which will continuously monitor your environment for malicious or unauthorized behavior.</p>
 <ol>
 <li>Go to the <a href="https://us-west-2.console.aws.amazon.com/guardduty/home?region=us-west-2" target="_blank">Amazon GuardDuty</a> console (us-west-2).</li>
-<li>If the <strong>Get Started</strong> button is available, click it. If not GuardDuty is enabled and skip step three.</li>
+<li>If the <strong>Get Started</strong> button is available, click it. If not, GuardDuty is enabled, you can skip step three.</li>
 <li>On the next screen click the <strong>Enable GuardDuty</strong> button.</li>
 </ol>
 <p>GuardDuty is now enabled and continuously monitoring your CloudTrail logs, VPC flow logs, and DNS Query logs for threats in your environment.</p>
 <h2 id="deploy-the-aws-cloudformation-template">Deploy the AWS CloudFormation template</h2>
-<p>To initiate the scenario and configure your environment you will need to run the module 1 CloudFormation template: </p>
+<p>To initiate the scenario and configure your environment you will need to run the module 1 CloudFormation template:</p>
 <div class="admonition info">
 <p class="admonition-title">Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/blob/EventEngine/templates/01-environment-setup-nom.yml" target="_blank">here</a href>.</p>
 </div>
@@ -589,10 +590,10 @@
 </table>
 <ol>
 <li>
-<p>Click the <strong>Deploy to AWS</strong> button above.  This will automatically take you to the console to run the template, click Next to get to the Specify Details page. </p>
+<p>Click the <strong>Deploy to AWS</strong> button above.  This will automatically take you to the console to run the template, click Next to get to the Specify Details page.</p>
 </li>
 <li>
-<p>On the <strong>Specify Details</strong> section enter the necessary parameters as shown below. </p>
+<p>On the <strong>Specify Details</strong> section enter the necessary parameters as shown below.</p>
 <table>
 <thead>
 <tr>
@@ -613,7 +614,7 @@
 </table>
 </li>
 <li>
-<p>Once you have entered your parameters click <strong>Next</strong>, </p>
+<p>Once you have entered your parameters click <strong>Next</strong>,</p>
 </li>
 <li>
 <p>Click <strong>Next</strong> again. (leave everything on this page at the default)</p>
@@ -644,7 +645,7 @@
 <p>Click <strong>Create Rule</strong></p>
 </li>
 <li>
-<p>Select <strong>Event Pattern</strong> click the dropdown labeled <strong>Build event pattern to match events by service</strong> and 
+<p>Select <strong>Event Pattern</strong> click the dropdown labeled <strong>Build event pattern to match events by service</strong> and
 select <strong>Custom event pattern</strong> in the drop down.</p>
 </li>
 </ol>
@@ -664,7 +665,7 @@ select <strong>Custom event pattern</strong> in the drop down.</p>
 
 <ol>
 <li>
-<p>For <em>Targets</em>, click <strong>Add Target</strong>, select <strong>Lambda Function</strong>, and then select <strong>threat-detection-wksp-remediation-nacl</strong>. 
+<p>For <em>Targets</em>, click <strong>Add Target</strong>, select <strong>Lambda Function</strong>, and then select <strong>threat-detection-wksp-remediation-nacl</strong>.
 Click <strong>Configure details</strong> at the bottom.</p>
 </li>
 <li>
@@ -675,11 +676,9 @@ Click <strong>Configure details</strong> at the bottom.</p>
 </ul>
 </li>
 <li>
-<p>Click <strong>Create rule</strong>.
-<strong>Optional:</strong> Consider examining the Lambda function to see what it does.  Open the <a href="https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2" target="_blank">Lambda console</a>. Click on the function named <strong>threat-detection-wksp-remediation-nacl</strong></p>
-<div class="admonition question">
-<p class="admonition-title">What will the function do when invoked?</p>
-</div>
+<p>Click <strong>Create rule</strong>.</p>
+<details class="question"><summary>What will the function do when invoked?</summary><p>Consider examining the Lambda function to see what it does.  Open the <a href="https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2" target="_blank">Lambda console</a>. Click on the function named <strong>threat-detection-wksp-remediation-nacl</strong></p>
+</details>
 </li>
 </ol>
 <!-- ## Enable Amazon Macie
@@ -700,13 +699,13 @@ Macie is also used for automatically discovering and classifying sensitive data.
 
 1.  In the Amazon Macie console click on **Integrations** on the left navigation.
 
-3.  Find your AWS account ID (there should be only one) and click **Select** 
+3.  Find your AWS account ID (there should be only one) and click **Select**
 
 4.  Click **Add** then on the next screen click the check box next to the S3 bucket that ends with **“-data”**. Click **Add**
 
 5. Leave the options here at the default, click **Review**.
 
-6. On the next screen click **Start Classification**. 
+6. On the next screen click **Start Classification**.
 
 6. Finally click **Done**. Macie is now enabled and has begun to discover, classify and protect your data.
 -->
@@ -715,8 +714,8 @@ Macie is also used for automatically discovering and classifying sensitive data.
 <p>Now that all of your detective controls have been configured you need to enable <a href="https://aws.amazon.com/security-hub/" target="_blank">AWS Security Hub</a>, which will provide you with a comprehensive view of the security and compliance of your AWS environment.</p>
 <ol>
 <li>Go to the <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#" target="_blank">AWS Security Hub</a> console.</li>
-<li>If the <strong>Get Started</strong> button is available, click it. If not Security Hub is enabled and skip step three.</li>
-<li>On the next screen click the <strong>Enable AWS Security Hub</strong> button.</li>
+<li>If the <strong>Get Started</strong> button is available, click it. If not, Security Hub is enabled, you can skip step three.</li>
+<li>On the next screen click the <strong>Enable AWS Security Hub</strong> button. (use default options)</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">If you see red text <code>AWS Config is not enabled on some accounts</code> in the Security Hub Console, you can safely ignore for this workshop.</p>

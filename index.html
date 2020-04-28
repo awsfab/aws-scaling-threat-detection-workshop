@@ -374,13 +374,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#presentation-deck" class="md-nav__link">
-    Presentation deck
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#region" class="md-nav__link">
     Region
   </a>
@@ -512,13 +505,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#presentation-deck" class="md-nav__link">
-    Presentation deck
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#region" class="md-nav__link">
     Region
   </a>
@@ -552,29 +538,30 @@
                 
                 
                 <h1 id="overview">Overview</h1>
-<p>This workshop is designed to help you get familiar with AWS Security services and learn how to use them to identify and remediate threats in your environment. You'll be working with services such as Amazon GuardDuty (threat detection), Amazon Macie (discover, classify &amp; protect data), Amazon Inspector (vulnerability &amp; behavior analysis), AWS Security Hub (centralized security view). You will learn how to use these services to investigate threats during and after an attack, set up a notification and response pipeline, and add additional protections to improve the security posture of your environment.</p>
+<p>This workshop is designed to help you get familiar with AWS Security services and learn how to use them to identify and remediate threats in your environment. You'll be working with services such as Amazon GuardDuty (threat detection), Amazon Inspector (vulnerability &amp; behavior analysis), AWS Security Hub (centralized security view). You will learn how to use these services to investigate threats during and after an attack, set up a notification and response pipeline, and add additional protections to improve the security posture of your environment.</p>
 <ul>
 <li><strong>Level</strong>: Intermediate</li>
 <li><strong>Duration</strong>: 2 - 3 hours</li>
 <li><strong><a href="https://www.nist.gov/cyberframework/online-learning/components-framework" target="_blank">CSF Functions</a></strong>: Detect, Respond, Recover</li>
 <li><strong><a href="https://d0.awsstatic.com/whitepapers/AWS_CAF_Security_Perspective.pdf" target="_blank">CAF Components</a></strong>: Detective, Responsive</li>
-<li><strong><a href="https://awssecworkshops.com/getting-started/" target="_blank">Prerequisites</a href></strong>: AWS Account, Admin IAM User</li>
+<li><strong><a href="https://awssecworkshops.com/getting-started/" target="_blank">Prerequisites</a></strong>: AWS Account, Admin IAM User</li>
 </ul>
 <h2 id="scenario">Scenario</h2>
 <p>Your company is new to the cloud and has recently performed a lift-and-shift of your infrastructure for piloting purposes.  You are a systems administrator and have been tasked with security monitoring within your AWS environment.  As part of that maintenance you are also responsible for responding to any security event in your environment.</p>
 <h2 id="architecture">Architecture</h2>
 <p>For this Workshop you will have a simple setup with a single instance setup in the us-west-2 region. As this was a “lift-and-shift” migration for piloting, you have yet to build redundancy into your application, so you have a single public-facing web server that is accessed through an internet gateway and retrieves static content from an S3 bucket.</p>
 <p><img alt="Architecture" src="images/diagram-basic-arch-v2.png" title="Workload Architecture" /></p>
-<h2 id="presentation-deck">Presentation deck</h2>
-<p><a href="threat-detect-workshop-presentation.pdf">Workshop Presentation Deck</a></p>
+<!--## Presentation deck
+[Workshop Presentation Deck](./threat-detect-workshop-presentation.pdf)-->
+
 <h2 id="region">Region</h2>
 <p>Please use the <strong>us-west-2 (Oregon)</strong> region for this workshop.</p>
 <h2 id="modules">Modules</h2>
-<p>This workshop is broken up into the four modules below: </p>
+<p>This workshop is broken up into the four modules below:</p>
 <ol>
 <li><a href="01-environment-setup/">Environment Build and Configuration</a></li>
-<li><a href="02-attack-simulation/">Attack Simulation</a> </li>
-<li><a href="03-detection-and-remediation/">Detection and Remediation</a> </li>
+<li><a href="02-attack-simulation/">Attack Simulation</a></li>
+<li><a href="03-detection-and-remediation/">Detection and Remediation</a></li>
 <li><a href="04-review-and-discussion/">Review and Discussion</a></li>
 </ol>
                 

@@ -513,11 +513,10 @@
 <p>Now that you have detective and responsive controls setup, you'll be running another CloudFormation template which will simulate the actual attack you will be investigating.</p>
 <p><strong>Agenda</strong></p>
 <ol>
-<li>Run the second CloudFormation template – 5 min</li>
-<li>Threat detection and response presentation – 25 min</li>
+<li>Run the second CloudFormation template – 10 min</li>
 </ol>
 <h2 id="deploy-the-cloudformation-template">Deploy the CloudFormation template</h2>
-<p>To initiate the attack simulation you will need to run the module 2 CloudFormation template: </p>
+<p>To initiate the attack simulation you will need to run the module 2 CloudFormation template:</p>
 <div class="admonition info">
 <p class="admonition-title">Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/blob/EventEngine/templates/02-attack-simulation-nom.yml" target="_blank">repo</a href>.</p>
 </div>
@@ -537,7 +536,7 @@
 </table>
 <ol>
 <li>
-<p>Click the <strong>Deploy to AWS</strong> button above.  This will automatically take you to the console to run the template. </p>
+<p>Click the <strong>Deploy to AWS</strong> button above.  This will automatically take you to the console to run the template.</p>
 </li>
 <li>
 <p>The name of the stack will be automatically populated but you are free to change it, after which click <strong>Next</strong>, then <strong>Next</strong> again (leave everything on this page at the default).  </p>
@@ -556,9 +555,9 @@
 <p>Below is a diagram of the setup after the module 2 CloudFormation stack is created.</p>
 <p><img alt="Module 2 Diagram" src="../images/02-diagram-module2-3v2.png" /></p>
 <div class="admonition warning">
-<p class="admonition-title">Threat detection and response presentation</p>
-<p><strong>AWS Sponsored Event</strong>: If you are going through this workshop in a classroom setting then wait till the presentation is over before starting module 3 (the presentation will allow enough time to pass for the attack scenario to complete.)</p>
-<p><strong>Individual</strong>: If you are going through this workshop outside of a classroom setting you can proceed to Module 3.  Please note it will take at least <strong>20 minutes</strong> after the 2nd CloudFormation template has completed before you will start seeing findings.</p>
+<p class="admonition-title">Threat detection and response</p>
+<p>Please note it will take at least <strong>20 minutes</strong> after the 2nd CloudFormation template has completed before you will start seeing findings.</p>
+<p>Consider examining the Lambda functions deployed in the environment (3 functions).  Open the <a href="https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2" target="_blank">Lambda console</a>.</p>
 </div>
                 
                   

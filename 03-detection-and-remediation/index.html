@@ -493,13 +493,22 @@ Outline for 03-detection-and-remediation.md
 <h3 id="detect-and-investigate">Detect and investigate</h3>
 <p>By now you’ve received email alerts from the security services you enabled. Now what? As part of your risk driven detection strategy your organization has decided to prioritize AWS IAM related findings.  </p>
 <ol>
-<li>Sort through your email alerts and identity an alert related to an AWS IAM principal</li>
-</ol>
+<li>
+<p>Sort through your email alerts and identity this alert:</p>
 <div class="admonition info">
 <p class="admonition-title">Amazon GuardDuty Finding: UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom</p>
+<p>From <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_unauthorized.html#unauthorized2" target="_blank">Amazon GuardDuty documentation</a></p>
+<p><strong>Finding description</strong>: An API was invoked from an IP address on a custom threat list.</p>
+<p>This finding informs you that an API operation (for example, an attempt to launch an EC2 instance, create a new IAM user, modify your AWS privileges, and so on) was invoked from an IP address that is included on a threat list that you uploaded. In GuardDuty, a threat list consists of known malicious IP addresses. GuardDuty generates findings based on uploaded threat lists. This can indicate unauthorized access to your AWS resources with the intent of hiding the attacker’s true identity.</p>
 </div>
-<ol>
-<li>Copy the <code>&lt;Access Key ID&gt;</code> from the e-mail alert.</li>
+</li>
+<li>
+<p>Copy the <code>&lt;Access Key ID&gt;</code> from the e-mail alert and keep it for later use.</p>
+<div class="admonition question">
+<p class="admonition-title">What credentials were used?</p>
+<p>While the e-mail alert provides some high level information regarding the API operation invoked and the IP address invoking it, further investigations are require to find out which credentials were used.</p>
+</div>
+</li>
 </ol>
 <p><strong>Explore findings related to the access key (Amazon GuardDuty)</strong></p>
 <p>Now that you have a resource identifier to pivot from you can use Amazon GuardDuty to start doing an initial investigation into these findings.</p>
@@ -508,75 +517,46 @@ Outline for 03-detection-and-remediation.md
 <p>Go to the <a href="https://us-west-2.console.aws.amazon.com/guardduty/" target="_blank">Amazon GuardDuty</a> console (us-west-2).</p>
 </li>
 <li>
-<p>Click in the <strong>Add filter criteria</strong> box, select <strong>Access Key ID</strong>, and then paste in the <code>&lt;Access Key ID&gt;</code> you copied from the e-mail, then select <strong>Apply</strong>.</p>
-<div class="admonition question">
-<p class="admonition-title">What findings do you see related to this Access Key ID?</p>
-</div>
+<p>Click in the <strong>Add filter criteria</strong> box, select <strong>Finding Type</strong>, and then enter <code>UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom</code>, then select <strong>Apply</strong>.</p>
 </li>
 <li>
-<p>Click on one of the findings to see the details.</p>
-<div class="admonition question">
-<p class="admonition-title">What principal are these credentials associated with?</p>
-</div>
-</li>
-</ol>
-<div class="admonition bug">
-<p class="admonition-title">Bug<p>The following 2 steps are misleading.</p>
-</p>
-</div>
-<ol>
-<li>Examining <strong>User type</strong> under <strong>Resource affected</strong> you can see that the access key referenced in this finding is from an IAM assumed role.</li>
-<li>Examining <strong>Principal ID</strong> under <strong>Resource affected</strong> you will find two strings separated by a colon. The first is the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids" target="_blank">unique ID</a> for the IAM role and the second is the EC2 instance ID.</li>
-</ol>
+<p>Click on the finding to see the details. Note that you can resize the panel by dragging the middle vertical scrollbar to the left.</p>
 <div class="admonition info">
-<p class="admonition-title">You may have to resize your screen by dragging the middle vertical scrollbar to the left to see the entire text</p>
+<p class="admonition-title">Amazon GuardDuty Finding Details</p>
+<p>The finding detail panel contains multiple information sections: <strong>Finding summary</strong> / <strong>Resource affected</strong> / <strong>Action</strong> / <strong>Actor</strong> / <strong>Additional information</strong></p>
+<p>For more details, you can review the <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings.html#guardduty_working-with-findings" target="_blank">Amazon GuardDuty documentation</a>.</p>
 </div>
-<ol>
-<li>
-<p>The <strong>Principal ID</strong> contains a unique ID for the entity making the API request, and when the request is made using temporary security credentials (which is what happens for an assume role call) it also includes a session name. In this case the session name is the EC2 instance ID since the assume role call was done using an IAM role for EC2.</p>
 </li>
 <li>
-<p>Copy the full <strong>Principal Id</strong> which contains both the unique ID of the role and the session name: <strong>"principalId": "<code>&lt; unique ID &gt;:&lt; session name &gt;</code>"</strong></p>
+<p>Examine the <strong>Resource affected</strong> section:</p>
+<ul>
+<li>The temporary credentials of an EC2 instance were used to perform the API operation.</li>
+<li>The <strong>Instance ID</strong> field shows the EC2 instance.</li>
+<li>The <strong>Iam instance profile</strong> field shows the EC2 instance profile <code>threat-detection-wksp-compromised-ec2-profile</code> which relates to the IAM role <code>threat-detection-wksp-compromised-ec2</code>.</li>
+<li>Take note of the <strong>Public IP</strong> field for that EC2.</li>
+</ul>
 </li>
 <li>
-<p>Examine the <strong>User Name</strong> under <strong>Resource affected</strong> and copy it down. This corresponds to the name of the IAM role involved since the temp creds used to make the API call came from EC2 instance with an IAM role attached.</p>
+<p>Examine the <strong>Action</strong> section:</p>
+<ul>
+<li>The <strong>Action type</strong> field shows that an 'AWS_API_CALL' have been performed using the EC2 IAM credentials.</li>
+<li>The <strong>Service name</strong> field shows which AWS service was contacted.</li>
+<li>The <strong>API</strong> field shows which action was performed on the above service.</li>
+</ul>
+</li>
+<li>
+<p>Examine the <strong>Actor</strong> section:</p>
+<ul>
+<li>The <strong>IP address</strong> field shows the IP address which invoked the API operation.</li>
+<li>This IP address is listed in a custom <strong>Guard Duty Threat List</strong> which contains known malicious IP addresses.</li>
+<li>Note that this IP address is different from our EC2 public IP address. It means that this IP used our EC2 temporary security credential to invoke the API.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Guard Duty Threat lists</p>
+<p>You can view the Guard Duty custom threat list  going to the  <strong>Settings &gt; List &gt; Threat lists</strong> page and open the S3 text file.</p>
+</div>
 </li>
 </ol>
-<!--
-
-To use SH for this we could use the insight "AWS users with the most suspicious activity" but that would be a stretch - no way to take this and figure out an IAM role is involved just by using the SH console.
-
-
-1. Go to the [AWS Security Hub](https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/investigate) console.
-2. The link should take you to the **Investigate** section but if not, click on **Investigate** in the navigation on the left.
-3. Click in the **Add filter** box:
-
-    * Scroll down to **Severity Label**, change the operator to **EQUALS** and type in **MEDIUM**
-
-    * Use your browser's find function **Control-F** and paste in the `<Access Key ID>` you copied from the e-mail.
-
-    >  What findings do you see related to this access-key ID?
-
-4. Click on one of the findings to see the details.
-
-    > Where did these credentials come from?
-
-Examining **userType** under **Resource details**/**Details** you can see that the access key referenced in this finding is from an IAM assumed role. Examining **principalID** under **Details** you will find two strings separated by a colon. The first is the [unique ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids) for the role and the second is the EC2 instance ID. The **principalID** contains a unique ID for the entity making the API request, and when the request is made using temporary security credentials (which is what happens for an assume role call) it also includes a session name. In this case the session name is the EC2 instance ID  since the assume role call was done using an IAM role for EC2.
-
-5. Copy the full **principalId** which contains both the unique ID of the role and the session name
-    * **"principalId": "`< unique ID >:< session name >`"**
-
-6. Click **Cancel** (upper right-hand corner) to return back to the findings and paste only the **unique ID** into the filter:
-    * **Keyword: `<unique ID>`**
-
-Filtering on the access key ID like you did previously earlier will only show you findings related to that specific access key.  In this case the access key is from an assumed role call which means it will change over time.  Rather than using the access key id you can filter on the unique ID for the AWS IAM role which will show you all findings related to any access keys generated by that AWS IAM role.
-
-7. After you have applied the filter check all the checkboxes for the findings, click **Actions**, and set active status to **In Progress** (since we are actively investigating this.)
-
-8. Click **Create Insight** so you can further track findings related to this IAM principal.  Enter the following into insight name **`Show me findings related to <Unique ID>`** and toggle the **Display on insights page** so it is enabled and click **Ok**
-
--->
-
 <h3 id="respond">Respond</h3>
 <p>Now that you have identified that a temporary security credential from an IAM role for EC2 is being used by an attacker, the decision has been made to rotate the credential immediately to prevent any further misuse or potential privilege escalation.</p>
 <p><strong>Revoke the IAM role sessions (IAM)</strong></p>
@@ -585,7 +565,7 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <p>Browse to the <a href="https://console.aws.amazon.com/iam/home?region=us-west-2" target="_blank">AWS IAM</a> console.</p>
 </li>
 <li>
-<p>Click <strong>Roles</strong> and find the role you identified in the previous section using the <strong>User Name</strong> you copied down earlier (this is the role attached to the compromised instance), and click on that <strong>Role Name</strong>.</p>
+<p>Click <strong>Roles</strong> and find the role <code>threat-detection-wksp-compromised-ec2</code>, and click on that <strong>Role Name</strong>.</p>
 </li>
 <li>
 <p>Click on the <strong>Revoke sessions</strong> tab.</p>
@@ -609,6 +589,9 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <ol>
 <li>
 <p>Wait for the Instance State to say <strong>stopped</strong> under <strong>Instance State</strong> (you may need to refresh the EC2 console) and then <strong>Start</strong> the instance.</p>
+</li>
+<li>
+<p>Take note of the <strong>Instance ID</strong> for later use.</p>
 <div class="admonition info">
 <p class="admonition-title">You will need to wait until all Status Checks have passed before continuing.</p>
 </div>
@@ -643,7 +626,7 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <h3 id="detect-and-investigate_1">Detect and investigate</h3>
 <p>Now that you've addressed the compromised IAM credential you need focus in on how the attacker was able to compromise the EC2 instance. It's this compromise which allowed them to query the instance metadata and steal the credentials.</p>
 <p><strong>Explore findings related to the instance ID (AWS Security Hub)</strong></p>
-<p>When investigating the compromised IAM credential you discovered that it was from an IAM role for EC2 and identified the EC2 instance ID from the principal ID of the finding. Using the instance ID <strong>(that you previously copied, it starts with an ‘i’, such as i-08fa26ffb15a66f5a)</strong> you can use AWS Security Hub to start investigating the findings.  To start, you are going to research the GuardDuty findings related to the EC2 instance.</p>
+<p>When investigating the compromised IAM credential you discovered that it was from an IAM role for EC2 and identified the EC2 instance ID of the finding. Using the instance ID <strong>(that you previously copied, it starts with an ‘i’, such as i-08fa26ffb15a66f5a)</strong> you can use AWS Security Hub to start investigating the findings.  To start, you are going to research the GuardDuty findings related to the EC2 instance.</p>
 <ol>
 <li>Go to the <a href="https://us-west-2.console.aws.amazon.com/securityhub/home?region=us-west-2#/findings" target="_blank">AWS Security Hub</a> console.</li>
 <li>
@@ -653,7 +636,7 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <p>Add a filter by clicking in the <strong>Add filter</strong> box and scrolling down to <strong>Product Name</strong>, and paste in the word <code>GuardDuty</code>.</p>
 </li>
 <li>
-<p>Use your browser's find function <strong>Control-F</strong> and paste in the <code>&lt;Instance ID&gt;</code> you copied earlier (from the principal ID you gathered in the GuardDuty finding).</p>
+<p>Use your browser's find function <strong>Control-F</strong> and paste in the <code>&lt;Instance ID&gt;</code> you copied earlier.</p>
 </li>
 <li>
 <p>Now copy the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html" target="_blank">Amazon Resource Name (ARN)</a> from the <strong>Resource ID</strong> for the first match. The ARN will look something like this <code>arn:aws:ec2:us-west-2:166199753942:instance/i-0efc5172a5d7ecc6b</code></p>
@@ -742,16 +725,16 @@ Filtering on the access key ID like you did previously earlier will only show yo
 <p>Under the <strong>Description</strong> tab, click on the Security Group for the compromised instance.</p>
 </li>
 <li>
-<p>View the rules under the <strong>Inbound</strong> tab.</p>
+<p>View the rules under the <strong>Inbound rules</strong> tab.</p>
 </li>
 <li>
-<p>Click <strong>Edit</strong> and delete the inbound SSH rule.</p>
+<p>Click <strong>Edit inbound rules</strong> and delete the inbound SSH rule.</p>
 <div class="admonition info">
 <p class="admonition-title">The SSM Agent was installed on your EC2 Instance during the initial configuration.</p>
 </div>
 </li>
 <li>
-<p>Click <strong>Save</strong></p>
+<p>Click <strong>Save rules</strong></p>
 </li>
 </ol>
 <!-- ## Part 3 - Compromised S3 bucket
@@ -844,9 +827,6 @@ In the previous step we determined that the S3 bucket that starts with **threat-
 <hr />
 <p>Here is a diagram of the attack you just investigated. Numbers 1 &amp; 2 show the SSH brute force attack and successful SSH login. Number 3 shows the S3 bucket changes the attacker made. Number 4 shows the API calls the attacker made with the IAM temporary credentials stolen from the compromised EC2 instance.
 <img alt="03-diagram-attack" src="../images/03-diagram-attack-v2.png" /></p>
-<div class="admonition warning">
-<p class="admonition-title">If you are going through this workshop in a classroom setting then the instructor should start the module 4 presentation soon.</p>
-</div>
                 
                   
                 
