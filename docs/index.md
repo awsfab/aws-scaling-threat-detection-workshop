@@ -1,12 +1,12 @@
 # Overview
 
-This workshop is designed to help you get familiar with AWS Security services and learn how to use them to identify and remediate threats in your environment. You'll be working with services such as Amazon GuardDuty (threat detection), Amazon Macie (discover, classify & protect data), Amazon Inspector (vulnerability & behavior analysis), AWS Security Hub (centralized security view). You will learn how to use these services to investigate threats during and after an attack, set up a notification and response pipeline, and add additional protections to improve the security posture of your environment.
+This workshop is designed to help you get familiar with AWS Security services and learn how to use them to identify and remediate threats in your environment. You'll be working with services such as Amazon GuardDuty (threat detection), Amazon Inspector (vulnerability & behavior analysis), AWS Security Hub (centralized security view). You will learn how to use these services to investigate threats during and after an attack, set up a notification and response pipeline, and add additional protections to improve the security posture of your environment.
 
 * **Level**: Intermediate
 * **Duration**: 2 - 3 hours
 * **<a href="https://www.nist.gov/cyberframework/online-learning/components-framework" target="_blank">CSF Functions</a>**: Detect, Respond, Recover
 * **<a href="https://d0.awsstatic.com/whitepapers/AWS_CAF_Security_Perspective.pdf" target="_blank">CAF Components</a>**: Detective, Responsive
-* **<a href="https://awssecworkshops.com/getting-started/" target="_blank">Prerequisites</a href>**: AWS Account, Admin IAM User
+* **<a href="https://awssecworkshops.com/getting-started/" target="_blank">Prerequisites</a>**: AWS Account, Admin IAM User
 
 ## Scenario
 
@@ -18,17 +18,17 @@ For this Workshop you will have a simple setup with a single instance setup in t
 
 ![Architecture](./images/diagram-basic-arch-v2.png "Workload Architecture")
 
-## Presentation deck
-[Workshop Presentation Deck](./threat-detect-workshop-presentation.pdf)
+<!--## Presentation deck
+[Workshop Presentation Deck](./threat-detect-workshop-presentation.pdf)-->
 
 ## Region
 Please use the **us-west-2 (Oregon)** region for this workshop.
 
 ## Modules
 
-This workshop is broken up into the four modules below: 
+This workshop is broken up into the four modules below:
 
 1. [Environment Build and Configuration](./01-environment-setup.md)
-2. [Attack Simulation](./02-attack-simulation.md) 
-3. [Detection and Remediation](./03-detection-and-remediation.md) 
+2. [Attack Simulation](./02-attack-simulation.md)
+3. [Detection and Remediation](./03-detection-and-remediation.md)
 4. [Review and Discussion](./04-review-and-discussion.md)
