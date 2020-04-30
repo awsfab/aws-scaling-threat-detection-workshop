@@ -3,32 +3,32 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: This AWS CloudFormation Template configures an environment with the necessary detective controls to support the Threat Detection Workshop.  DO NOT run this template in a production AWS Account.
 
 Parameters:
-  
+
   ResourceName:
     Type: String
     Default: threat-detection-wksp
-    AllowedValues: 
+    AllowedValues:
       - threat-detection-wksp
     Description: Prefix of Resources created for this workshop.
 
-  Email: 
+  Email:
     Type: String
     Description: Enter a valid email address for receiving alerts.
 
-Metadata: 
+Metadata:
   AWS::CloudFormation::Interface:
-    ParameterGroups: 
-      - 
-        Label: 
+    ParameterGroups:
+      -
+        Label:
           default: "Resource and Notification Configuration"
-        Parameters: 
+        Parameters:
           - ResourceName
           - Email
 
-    ParameterLabels: 
+    ParameterLabels:
       ResourceName:
         default: "Resource Prefix"
-      Email: 
+      Email:
         default: "Email Address"
 
 
@@ -39,17 +39,17 @@ Conditions: {}
 Resources:
 
   ### CloudTrail and Logging Bucket
-  CloudTrail: 
-    DependsOn: 
+  CloudTrail:
+    DependsOn:
       - LogBucketPolicy
     Type: "AWS::CloudTrail::Trail"
-    Properties: 
+    Properties:
       S3BucketName: !Ref LogBucket
       IsLogging: true
       EnableLogFileValidation: true
       IsMultiRegionTrail: false
       IncludeGlobalServiceEvents: true
-      TrailName: 
+      TrailName:
         Fn::Join:
           - '-'
           - [!Ref ResourceName, 'trail']
@@ -60,45 +60,45 @@ Resources:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: 'AES256'
-      BucketName: 
+      BucketName:
         Fn::Join:
           - '-'
           - [!Ref ResourceName, !Ref "AWS::AccountId", !Ref "AWS::Region",'logs']
-  LogBucketPolicy: 
-    DependsOn: 
+  LogBucketPolicy:
+    DependsOn:
       - LogBucket
     Type: "AWS::S3::BucketPolicy"
-    Properties: 
+    Properties:
       Bucket: !Ref LogBucket
-      PolicyDocument: 
+      PolicyDocument:
         Version: "2012-10-17"
-        Statement: 
-          - 
+        Statement:
+          -
             Sid: "AWSCloudTrailAclCheck"
             Effect: "Allow"
-            Principal: 
+            Principal:
               Service: "cloudtrail.amazonaws.com"
             Action: "s3:GetBucketAcl"
-            Resource: 
+            Resource:
               Fn::Join:
                 - ''
                 - ["arn:aws:s3:::", !Ref LogBucket]
-          - 
+          -
             Sid: "AWSCloudTrailWrite"
             Effect: "Allow"
-            Principal: 
+            Principal:
               Service: "cloudtrail.amazonaws.com"
             Action: "s3:PutObject"
             Resource:
               Fn::Join:
                 - ''
                 - ["arn:aws:s3:::", !Ref LogBucket,'/AWSLogs/*']
-            Condition: 
+            Condition:
               StringEquals:
                 s3:x-amz-acl: "bucket-owner-full-control"
 
   ### Data Bucket
- 
+
   DataBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
@@ -106,7 +106,7 @@ Resources:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: 'AES256'
-      BucketName: 
+      BucketName:
         Fn::Join:
           - '-'
           - [!Ref ResourceName, !Ref "AWS::AccountId", !Ref "AWS::Region",'data']
@@ -119,7 +119,7 @@ Resources:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: 'AES256'
-      BucketName: 
+      BucketName:
         Fn::Join:
           - '-'
           - [!Ref ResourceName, !Ref "AWS::AccountId", !Ref "AWS::Region",'gd-threatlist']
@@ -142,36 +142,36 @@ Resources:
         - Sid: SID-Detection-Workshop
           Effect: Allow
           Principal:
-            Service: 
+            Service:
               - events.amazonaws.com
               - inspector.amazonaws.com
           Action: sns:Publish
           Resource: !Ref DetectionSNSTopic
-      Topics: 
+      Topics:
       - !Ref DetectionSNSTopic
 
   # CloudWatch Event Rules
-  GuardDutyIAMFindingEvent: 
+  GuardDutyIAMFindingEvent:
     Type: "AWS::Events::Rule"
-    Properties: 
-      Name: 
+    Properties:
+      Name:
         Fn::Join:
           - '-'
           - [!Ref ResourceName, 'guardduty-iam-finding']
       Description: "GuardDuty: AWS IAM Findings"
-      EventPattern: 
+      EventPattern:
         source:
         - aws.guardduty
         detail-type:
         - "GuardDuty Finding"
         detail:
           resource:
-            resourceType: 
+            resourceType:
             - AccessKey
       State: "ENABLED"
-      Targets: 
-        - 
-          Arn: 
+      Targets:
+        -
+          Arn:
             Ref: "DetectionSNSTopic"
           Id: "DetectionSNSTopic-GuardDuty"
           InputTransformer:
@@ -183,28 +183,28 @@ Resources:
               region: "$.region"
               accessKey: "$.detail.resource.accessKeyDetails.accessKeyId"
               userType: "$.detail.resource.accessKeyDetails.userType"
-  
-  GuardDutyEC2FindingEvent: 
+
+  GuardDutyEC2FindingEvent:
     Type: "AWS::Events::Rule"
-    Properties: 
-      Name: 
+    Properties:
+      Name:
         Fn::Join:
           - '-'
           - [!Ref ResourceName, 'guardduty-ec2-finding']
       Description: "GuardDuty: AWS EC2 Findings"
-      EventPattern: 
+      EventPattern:
         source:
         - aws.guardduty
         detail-type:
         - "GuardDuty Finding"
         detail:
           resource:
-            resourceType: 
+            resourceType:
             - Instance
       State: "ENABLED"
-      Targets: 
-        - 
-          Arn: 
+      Targets:
+        -
+          Arn:
             Ref: "DetectionSNSTopic"
           Id: "DetectionSNSTopic-GuardDuty"
           InputTransformer:
@@ -216,46 +216,46 @@ Resources:
               region: "$.region"
               instanceid: "$.detail.resource.instanceDetails.instanceId"
 
-  GuardDutyFindingEventSSHBruteForce: 
+  GuardDutyFindingEventSSHBruteForce:
     Type: "AWS::Events::Rule"
-    Properties: 
-      Name: 
+    Properties:
+      Name:
         Fn::Join:
           - '-'
           - [!Ref ResourceName, 'guardduty-finding', 'sshbruteforce']
       Description: "GuardDuty Finding: UnauthorizedAccess:EC2/SSHBruteForce"
-      EventPattern: 
+      EventPattern:
         source:
         - aws.guardduty
         detail:
           type:
           - "UnauthorizedAccess:EC2/SSHBruteForce"
       State: "ENABLED"
-      Targets: 
-        - 
+      Targets:
+        -
           Arn: !GetAtt LambdaRemediationInspector.Arn
           Id: "GuardDutyEvent-Lambda-Trigger-Inspector"
-        - 
+        -
           Arn: !GetAtt LambdaRemediationNACL.Arn
           Id: "GuardDutyEvent-Lambda-Trigger-NACL"
 
-#  MacieAlertEvent: 
+#  MacieAlertEvent:
 #    Type: "AWS::Events::Rule"
-#    Properties: 
-#      Name: 
+#    Properties:
+#      Name:
 #        Fn::Join:
 #          - '-'
 #          - [!Ref ResourceName, 'macie-alert']
 #      Description: "All Macie Alerts"
-#      EventPattern: 
+#      EventPattern:
 #        source:
 #        - aws.macie
 #        detail-type:
 #        - "Macie Alert"
 #      State: "ENABLED"
-#      Targets: 
-#        - 
-#          Arn: 
+#      Targets:
+#        -
+#          Arn:
 #            Ref: "DetectionSNSTopic"
 #          Id: "DetectionSNSTopic-Macie"
 #          InputTransformer:
@@ -265,10 +265,10 @@ Resources:
 
 
   ### Configuration Lambda - Inspectors
-  LambdaAdditionalConfig: 
+  LambdaAdditionalConfig:
     Type: "AWS::Lambda::Function"
-    Properties: 
-      FunctionName: 
+    Properties:
+      FunctionName:
         Fn::Join:
         - '-'
         - [!Ref ResourceName, 'additional-configuration']
@@ -276,11 +276,11 @@ Resources:
       Environment:
         Variables:
           PREFIX: !Ref ResourceName
-      Role: 
-        Fn::GetAtt: 
+      Role:
+        Fn::GetAtt:
           - "LambdaAdditionalConfigRole"
           - "Arn"
-      Code: 
+      Code:
         ZipFile: |
           from __future__ import print_function
           from urllib2 import build_opener, HTTPHandler, Request
@@ -289,7 +289,7 @@ Resources:
           import json
           import httplib
           import os
-           
+
           def handler(event, context):
 
             inspector = boto3.client('inspector')
@@ -320,7 +320,7 @@ Resources:
             elif event['RequestType'] == 'Update':
               print("log -- Update Event")
               try:
-                
+
                 group = inspector.create_resource_group(
                     resourceGroupTags=[
                         {
@@ -344,7 +344,7 @@ Resources:
             else:
                 print("log -- FAILED")
                 response = sendResponse(event, context, "FAILED", { "Message": "Unexpected event received from CloudFormation" })
-        
+
             return response
 
           def sendResponse(event, context, responseStatus, responseData):
@@ -372,38 +372,38 @@ Resources:
       Runtime: "python2.7"
       Timeout: "35"
 
-  LambdaAdditionalConfigRole: 
+  LambdaAdditionalConfigRole:
     Type: AWS::IAM::Role
-    Properties: 
-      RoleName: 
+    Properties:
+      RoleName:
         Fn::Join:
         - '-'
         - [!Ref ResourceName, 'lambda', 'inspector-creation']
-      AssumeRolePolicyDocument: 
+      AssumeRolePolicyDocument:
         Version: 2012-10-17
-        Statement: 
-          - 
+        Statement:
+          -
             Effect: Allow
-            Principal: 
-              Service: 
+            Principal:
+              Service:
                 - lambda.amazonaws.com
-            Action: 
+            Action:
               - sts:AssumeRole
       Path: /
-      Policies: 
-        - 
+      Policies:
+        -
           PolicyName: RemediationPolicy
-          PolicyDocument: 
+          PolicyDocument:
             Version: 2012-10-17
-            Statement: 
-              - 
+            Statement:
+              -
                 Effect: Allow
                 Action:
                   - logs:CreateLogGroup
                   - logs:CreateLogStream
                   - logs:PutLogEvents
                 Resource: '*'
-              - 
+              -
                 Effect: Allow
                 Action:
                   - iam:CreateServiceLinkedRole
@@ -417,10 +417,10 @@ Resources:
       ParameterOne: Parameter to pass into Custom Lambda Function
 
   # Remediation Lambda - SSH Brute Force
-  LambdaRemediationInspector: 
+  LambdaRemediationInspector:
     Type: "AWS::Lambda::Function"
-    Properties: 
-      FunctionName: 
+    Properties:
+      FunctionName:
         Fn::Join:
         - '-'
         - [!Ref ResourceName, 'remediation', 'inspector']
@@ -429,15 +429,15 @@ Resources:
         Variables:
           TOPIC_ARN: !Ref DetectionSNSTopic
           PREFIX: !Ref ResourceName
-          COMRPOMISED_INSTANCE_TAG: 
+          COMRPOMISED_INSTANCE_TAG:
             Fn::Join:
             - ':'
             - [!Ref ResourceName, ' Compromised Instance']
-      Role: 
-        Fn::GetAtt: 
+      Role:
+        Fn::GetAtt:
           - "LambdaRemediationRole"
           - "Arn"
-      Code: 
+      Code:
         ZipFile: |
           from __future__ import print_function
           from botocore.exceptions import ClientError
@@ -448,7 +448,7 @@ Resources:
           import time
 
           def handler(event, context):
-  
+
             # Log Event
             print("log -- Event: %s " % json.dumps(event))
 
@@ -464,23 +464,23 @@ Resources:
 
             ec2 = boto3.client('ec2')
             scan = True
-            wksp = False
+            wksp = True
 
-            for i in event['detail']['resource']['instanceDetails']['tags']:
-              if i['value'] == os.environ['PREFIX']:
-                wksp = True
-              elif i['key'] == scan_name:
-                scan = False
+            # for i in event['detail']['resource']['instanceDetails']['tags']:
+            #   if i['value'] == os.environ['PREFIX']:
+            #     wksp = True
+            #   elif i['key'] == scan_name:
+            #     scan = False
 
             print("log -- Event: Scan - %s" % scan)
             print("log -- Event: Workshop - %s" % wksp)
 
             if gd_sev == 2 and scan == True and wksp == True:
-              
+
               print("log -- Event: Inspector Scan Kickoff")
               try:
                 inspector = boto3.client('inspector')
-                
+
                 ec2.create_tags(
                     Resources=[
                         instance_id,
@@ -537,7 +537,7 @@ Resources:
                     time.sleep(5)
                     assessment = inspector.start_assessment_run(
                         assessmentTemplateArn=template['assessmentTemplateArn'],
-                        assessmentRunName=assess_name     
+                        assessmentRunName=assess_name
                     )
                     break
                   except ClientError as e:
@@ -554,20 +554,20 @@ Resources:
             return response
       Runtime: "python2.7"
       Timeout: "120"
-  LambdaRemediationInspectInvokePermissions: 
+  LambdaRemediationInspectInvokePermissions:
     DependsOn:
       - LambdaRemediationInspector
     Type: "AWS::Lambda::Permission"
-    Properties: 
+    Properties:
       FunctionName: !Ref "LambdaRemediationInspector"
       Action: "lambda:InvokeFunction"
       Principal: "events.amazonaws.com"
 
   # Remediation Lambda - NACL Modification
-  LambdaRemediationNACL: 
+  LambdaRemediationNACL:
     Type: "AWS::Lambda::Function"
-    Properties: 
-      FunctionName: 
+    Properties:
+      FunctionName:
         Fn::Join:
         - '-'
         - [!Ref ResourceName, 'remediation', 'nacl']
@@ -576,24 +576,24 @@ Resources:
         Variables:
           TOPIC_ARN: !Ref DetectionSNSTopic
           PREFIX: !Ref ResourceName
-          COMRPOMISED_INSTANCE_TAG: 
+          COMRPOMISED_INSTANCE_TAG:
             Fn::Join:
             - ':'
             - [!Ref ResourceName, ' Compromised Instance']
-      Role: 
-        Fn::GetAtt: 
+      Role:
+        Fn::GetAtt:
           - "LambdaRemediationRole"
           - "Arn"
-      Code: 
+      Code:
         ZipFile: |
           from __future__ import print_function
           from botocore.exceptions import ClientError
           import boto3
           import json
           import os
-           
+
           def handler(event, context):
-             
+
             # Log Event
             print("log -- Event: %s " % json.dumps(event))
 
@@ -618,7 +618,7 @@ Resources:
 
               # Setup a NACL to deny inbound and outbound calls from the malicious IP from this subnet
               ec2 = boto3.client('ec2')
-             
+
               response = ec2.describe_network_acls(
                 Filters=[
                   {
@@ -635,7 +635,7 @@ Resources:
                   }
                 ]
               )
-                           
+
               gd_nacl_id = response["NetworkAcls"][0]["NetworkAclId"]
 
               if gd_sev == 2 and wksp == True and event["detail"]["type"] == "UnauthorizedAccess:EC2/SSHBruteForce":
@@ -650,7 +650,7 @@ Resources:
                 )
 
                 print("log -- Event: NACL Deny Rule for UnauthorizedAccess:EC2/SSHBruteForce Finding ")
-                  
+
               elif wksp == True and event["detail"]["type"] == "UnauthorizedAccess:EC2/MaliciousIPCaller.Custom":
                   response = ec2.create_network_acl_entry(
                       DryRun=False,
@@ -673,40 +673,40 @@ Resources:
 
       Runtime: "python2.7"
       Timeout: "35"
-  LambdaRemediationNACLInvokePermissions: 
+  LambdaRemediationNACLInvokePermissions:
     DependsOn:
       - LambdaRemediationNACL
     Type: "AWS::Lambda::Permission"
-    Properties: 
+    Properties:
       FunctionName: !Ref "LambdaRemediationNACL"
       Action: "lambda:InvokeFunction"
       Principal: "events.amazonaws.com"
 
-  LambdaRemediationRole: 
+  LambdaRemediationRole:
     Type: AWS::IAM::Role
-    Properties: 
-      RoleName: 
+    Properties:
+      RoleName:
         Fn::Join:
         - '-'
         - [!Ref ResourceName, 'lambda', 'remediation']
-      AssumeRolePolicyDocument: 
+      AssumeRolePolicyDocument:
         Version: 2012-10-17
-        Statement: 
-          - 
+        Statement:
+          -
             Effect: Allow
-            Principal: 
-              Service: 
+            Principal:
+              Service:
                 - lambda.amazonaws.com
-            Action: 
+            Action:
               - sts:AssumeRole
       Path: /
-      Policies: 
-        - 
+      Policies:
+        -
           PolicyName: RemediationPolicy
-          PolicyDocument: 
+          PolicyDocument:
             Version: 2012-10-17
-            Statement: 
-              - 
+            Statement:
+              -
                 Effect: Allow
                 Action:
                   - inspector:CreateAssessmentTemplate
@@ -722,7 +722,7 @@ Resources:
                   - ec2:*NetworkAcl*
                   - iam:CreateServiceLinkedRole
                 Resource: '*'
-              - 
+              -
                 Effect: Allow
                 Action:
                   - logs:CreateLogGroup
