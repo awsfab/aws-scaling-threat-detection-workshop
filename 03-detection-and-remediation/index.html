@@ -85,7 +85,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#agenda" tabindex="0" class="md-skip">
+      <a href="#module-3-detect-investigate-respond" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -377,9 +377,85 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Module 3: Detect & Respond
+      </label>
+    
     <a href="./" title="Module 3: Detect & Respond" class="md-nav__link md-nav__link--active">
       Module 3: Detect & Respond
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-compromised-aws-iam-credentials" class="md-nav__link">
+    Part 1 - Compromised AWS IAM credentials
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detect-and-investigate" class="md-nav__link">
+    Detect and investigate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respond" class="md-nav__link">
+    Respond
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-compromised-ec2-instance" class="md-nav__link">
+    Part 2 - Compromised EC2 instance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detect-and-investigate_1" class="md-nav__link">
+    Detect and investigate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respond_1" class="md-nav__link">
+    Respond
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -437,6 +513,69 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-compromised-aws-iam-credentials" class="md-nav__link">
+    Part 1 - Compromised AWS IAM credentials
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detect-and-investigate" class="md-nav__link">
+    Detect and investigate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respond" class="md-nav__link">
+    Respond
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-compromised-ec2-instance" class="md-nav__link">
+    Part 2 - Compromised EC2 instance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detect-and-investigate_1" class="md-nav__link">
+    Detect and investigate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respond_1" class="md-nav__link">
+    Respond
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -480,15 +619,13 @@ Outline for 03-detection-and-remediation.md
 # Link to next module
 -->
 
-<h1 id="agenda">Agenda</h1>
-<ol>
-<li>Compromised AWS IAM credentials ~ 25-40 mins</li>
-<li>Compromised EC2 instance ~ 25-40 mins
-<!-- 3. Compromised S3 bucket  ~ 15-25 mins
---></li>
-</ol>
 <h1 id="module-3-detect-investigate-respond">Module 3: Detect, Investigate &amp; Respond</h1>
 <p>Unfortunately, due to a misconfiguration in your environment, an attacker may have been able to gain access to the web server. You are getting alerts from the security services you’ve put in place indicating malicious activity. These alerts include communication with known malicious IP addresses, account reconnaissance, changes to an Amazon S3 bucket configuration, and disabling security configurations. You must identify what activity the intruder may have performed and how they did it so you can block the intruder’s access, remediate the vulnerabilities, and restore the configuration to its proper state.</p>
+<p><strong>Agenda</strong></p>
+<ol>
+<li>Compromised AWS IAM credentials ~ 25-40 mins</li>
+<li>Compromised EC2 instance ~ 25-40 mins</li>
+</ol>
 <h2 id="part-1-compromised-aws-iam-credentials">Part 1 - Compromised AWS IAM credentials</h2>
 <h3 id="detect-and-investigate">Detect and investigate</h3>
 <p>By now you’ve received email alerts from the security services you enabled. Now what? As part of your risk driven detection strategy your organization has decided to prioritize AWS IAM related findings.  </p>
