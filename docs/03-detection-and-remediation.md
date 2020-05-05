@@ -53,6 +53,10 @@ By now you’ve received email alerts from the security services you enabled. No
 
         This finding informs you that an API operation (for example, an attempt to launch an EC2 instance, create a new IAM user, modify your AWS privileges, and so on) was invoked from an IP address that is included on a threat list that you uploaded. In GuardDuty, a threat list consists of known malicious IP addresses. GuardDuty generates findings based on uploaded threat lists. This can indicate unauthorized access to your AWS resources with the intent of hiding the attacker’s true identity.
 
+    !!! warning "Email delays"
+        Please note it will take at least 20 minutes prior receiving emails. Email delays can be due to multiple parameters (sender, receiver servers). You can potentially go a bit faster by refreshing the GuardDuty console to find the finding.
+
+
 2. Copy the `<Access Key ID>` from the e-mail alert and keep it for later use.
 
     !!! question "What credentials were used?"

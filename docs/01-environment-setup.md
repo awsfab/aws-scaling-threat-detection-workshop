@@ -24,7 +24,7 @@ GuardDuty is now enabled and continuously monitoring your CloudTrail logs, VPC f
 
 To initiate the scenario and configure your environment you will need to run the module 1 CloudFormation template:
 
-!!! info "Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/blob/EventEngine/templates/01-environment-setup-nom.yml" target="_blank">here</a href>."
+!!! info "Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/awsfab/aws-scaling-threat-detection-workshop/blob/EventEngine/templates/01-environment-setup-nom.yml" target="_blank">here</a href>."
 
 Region| Deploy
 ------|-----
@@ -50,9 +50,18 @@ This will bring you back to the CloudFormation console. You can refresh the page
 
 ![Stack Complete](./images/01-stack-complete.png)
 
+You will get an email from SNS asking you to confirm the Subscription. **Confirm the subscription** so you can receive email alerts from AWS services during the workshop. The email may take 2-3 minutes to arrive, check your spam/junk folder if it doesn’t arrive within that timeframe.
+
 !!! info "Do not forget to check your email!"
 
- You will get an email from SNS asking you to confirm the Subscription. **Confirm the subscription** so you can receive email alerts from AWS services during the workshop. The email may take 2-3 minutes to arrive, check your spam/junk folder if it doesn’t arrive within that timeframe.
+!!! note "Bonus (optional): SMS notifications"
+		You could setup SMS notifications for the findings:
+
+		1. Open the <a href="https://us-west-2.console.aws.amazon.com/sns/v3/home?region=us-west-2" target="_blank">SNS console</a> (us-west-2)
+		2. Go to Subscriptions and click Create Subscription
+		3. Click on Topic ARN field and select the threat-detection-wksp Topic
+		4. Select SMS as Protocol
+		5. Enter your phone number using international format (+61xxx xxx xxx)
 
 ## Setup Amazon CloudWatch event rules and automatic response
 
