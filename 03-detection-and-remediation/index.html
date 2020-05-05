@@ -638,6 +638,10 @@ Outline for 03-detection-and-remediation.md
 <p><strong>Finding description</strong>: An API was invoked from an IP address on a custom threat list.</p>
 <p>This finding informs you that an API operation (for example, an attempt to launch an EC2 instance, create a new IAM user, modify your AWS privileges, and so on) was invoked from an IP address that is included on a threat list that you uploaded. In GuardDuty, a threat list consists of known malicious IP addresses. GuardDuty generates findings based on uploaded threat lists. This can indicate unauthorized access to your AWS resources with the intent of hiding the attacker’s true identity.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Email delays</p>
+<p>Please note it will take at least 20 minutes prior receiving emails. Email delays can be due to multiple parameters (sender, receiver servers). You can potentially go a bit faster by refreshing the GuardDuty console to find the finding.</p>
+</div>
 </li>
 <li>
 <p>Copy the <code>&lt;Access Key ID&gt;</code> from the e-mail alert and keep it for later use.</p>

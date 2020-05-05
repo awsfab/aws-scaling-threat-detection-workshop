@@ -572,7 +572,7 @@
 <h2 id="deploy-the-aws-cloudformation-template">Deploy the AWS CloudFormation template</h2>
 <p>To initiate the scenario and configure your environment you will need to run the module 1 CloudFormation template:</p>
 <div class="admonition info">
-<p class="admonition-title">Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/awsrossw/aws-scaling-threat-detection-workshop/blob/EventEngine/templates/01-environment-setup-nom.yml" target="_blank">here</a href>.</p>
+<p class="admonition-title">Before you deploy the CloudFormation template feel free to view it <a href="https://github.com/awsfab/aws-scaling-threat-detection-workshop/blob/EventEngine/templates/01-environment-setup-nom.yml" target="_blank">here</a href>.</p>
 </div>
 <table>
 <thead>
@@ -626,10 +626,21 @@
 <p><img alt="IAM Capabilities" src="../images/iam-capabilities.png" /></p>
 <p>This will bring you back to the CloudFormation console. You can refresh the page to see the stack starting to create. Before moving on, make sure the stack is in a <strong>CREATE_COMPLETE</strong> status as shown below.</p>
 <p><img alt="Stack Complete" src="../images/01-stack-complete.png" /></p>
+<p>You will get an email from SNS asking you to confirm the Subscription. <strong>Confirm the subscription</strong> so you can receive email alerts from AWS services during the workshop. The email may take 2-3 minutes to arrive, check your spam/junk folder if it doesn’t arrive within that timeframe.</p>
 <div class="admonition info">
 <p class="admonition-title">Do not forget to check your email!</p>
 </div>
-<p>You will get an email from SNS asking you to confirm the Subscription. <strong>Confirm the subscription</strong> so you can receive email alerts from AWS services during the workshop. The email may take 2-3 minutes to arrive, check your spam/junk folder if it doesn’t arrive within that timeframe.</p>
+<div class="admonition note">
+<p class="admonition-title">Bonus (optional): SMS notifications<p>You could setup SMS notifications for the findings:</p>
+<ol>
+<li>Open the <a href="https://us-west-2.console.aws.amazon.com/sns/v3/home?region=us-west-2" target="_blank">SNS console</a> (us-west-2)</li>
+<li>Go to Subscriptions and click Create Subscription</li>
+<li>Click on Topic ARN field and select the threat-detection-wksp Topic</li>
+<li>Select SMS as Protocol</li>
+<li>Enter your phone number using international format (+61xxx xxx xxx)</li>
+</ol>
+</p>
+</div>
 <h2 id="setup-amazon-cloudwatch-event-rules-and-automatic-response">Setup Amazon CloudWatch event rules and automatic response</h2>
 <p>The CloudFormation template you just ran created <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html" target="_blank">CloudWatch Event Rules</a> for alerting and response purposes. The steps below will walk you through creating the final rule.  After this you'll have rules in place to receive email notifications and trigger AWS Lambda functions to respond to threats.</p>
 <p>Below are steps to create a rule through the console but you can also find out more about doing it programmatically by reviewing the <a href="http://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings_cloudwatch.html" target="_blank">Amazon GuardDuty Documentation</a>.</p>
