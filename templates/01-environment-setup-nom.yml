@@ -606,11 +606,11 @@ Resources:
 
             response = "Skipping Remediation"
 
-            wksp = False
+            wksp = True
 
-            for i in event['detail']['resource']['instanceDetails']['tags']:
-              if i['value'] == os.environ['PREFIX']:
-                wksp = True
+            # for i in event['detail']['resource']['instanceDetails']['tags']:
+            #   if i['value'] == os.environ['PREFIX']:
+            #     wksp = True
 
             print("log -- Event: Workshop - %s" % wksp)
 

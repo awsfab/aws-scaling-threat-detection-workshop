@@ -8,7 +8,7 @@ In this first module you will be configuring detective and responsive controls f
 2. Run the initial CloudFormation Template – 5 min
 3. Confirm SNS subscription in your email - 1 min
 4. Create a CloudWatch Rule - 5 min
-5. Manually Enable detective controls - 5 min
+5. Enable AWS Security Hub - 5 min
 
 ## Enable Amazon GuardDuty
 
